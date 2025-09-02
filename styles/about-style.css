@@ -1,0 +1,229 @@
+/* โครงหน้า About ใช้พื้นหลังเข้มแบบหน้าแรก */
+:root {
+  --brand-white: #fff;
+  --brand-red: #ff6b6b; /* ปรับโทนแดงได้: #ff3b30, #ff5252  #ff4d4d*/
+}
+.about-hero,
+.about-grid,
+.about-nwd,
+.about-what,
+.about-guidelines,
+.about-cta {
+  margin: clamp(28px, 4vw, 48px) auto;
+  max-width: 1200px;
+  padding: 0 clamp(16px, 4vw, 24px);
+  color: var(--fg, #fff);
+}
+.brand-wild {
+  color: var(--brand-white);
+  font-weight: 900;
+}
+.brand-life {
+  color: var(--brand-red);
+  font-weight: 900;
+}
+/* HERO */
+.about-hero {
+  position: relative;
+  min-height: 56vh;
+  display: flex;
+  align-items: center;
+}
+.about-hero__image {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.about-hero__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about-hero__image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.35) 40%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+.about-hero__content {
+  position: relative;
+  z-index: 3;
+  max-width: 760px;
+  padding: clamp(20px, 4vw, 40px) 0;
+}
+.about-hero .tag {
+  display: inline-block;
+  color: var(--accent, #ffa500);
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.about-hero .title {
+  font-size: clamp(3rem, 1.4vw + 0.5rem, 3.25rem);
+  line-height: 1.15;
+  font-weight: 900;
+  margin-bottom: 12px;
+  text-wrap: balance;
+}
+.about-hero .lead {
+  color: #d6d6d6;
+  line-height: 1.8;
+  margin-bottom: 18px;
+  max-width: 68ch;
+  text-wrap: pretty;
+}
+.about-hero .actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 8px;
+}
+.about-hero .impact {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  color: #cfcfcf;
+}
+.about-hero .impact li {
+  list-style: none;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+/* CARDS */
+.card {
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: clamp(18px, 3.2vw, 28px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+.card h2,
+.card h3 {
+  margin-bottom: 0.6rem;
+}
+.card p {
+  color: #d6d6d6;
+}
+
+/* 2 คอลัมน์ Mission/Vision */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* NWD section */
+.about-nwd {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+  align-items: center;
+}
+.about-nwd img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+}
+.about-nwd .bullets {
+  margin: 12px 0 8px 18px;
+  color: #dcdcdc;
+}
+.about-nwd .actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+.about-nwd .note {
+  display: block;
+  margin-top: 6px;
+  color: #bdbdbd;
+}
+
+/* What we do: 4 การ์ด */
+.about-what {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Guidelines */
+.about-guidelines ol {
+  margin: 8px 0 0 18px;
+}
+.about-guidelines li {
+  margin: 0.25rem 0;
+  color: #dcdcdc;
+}
+
+/* CTA ท้ายหน้า */
+.about-cta {
+  text-align: center;
+}
+.about-cta .actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 10px 0;
+}
+.about-cta .note {
+  color: #bdbdbd;
+}
+
+/* ปุ่มใช้สไตล์จากหน้าหลักถ้ามี */
+.btn-primary,
+.btn-secondary {
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 800;
+  border: 2px solid transparent;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-primary {
+  background: var(--accent, #ffa500);
+  color: #111;
+}
+.btn-secondary {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+.btn-primary:hover {
+  filter: brightness(0.95);
+}
+.btn-secondary:hover {
+  background: #fff;
+  color: #111;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-nwd {
+    grid-template-columns: 1fr;
+  }
+  .about-what {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .about-what {
+    grid-template-columns: 1fr;
+  }
+  .about-hero {
+    min-height: 64vh;
+  }
+}
