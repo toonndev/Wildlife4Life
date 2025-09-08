@@ -3,446 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>วันอนุรักษ์สัตว์ป่าแห่งชาติ - ความเป็นมา</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+    <title>Wildlife4Life</title>
+    <link rel="stylesheet" href="/styles/blog-content-info-26-dec.css" />
+    <link rel="stylesheet" href="/styles/flat.css" />
 
-      body {
-        font-family: "Kanit", "Prompt", sans-serif;
-        line-height: 1.6;
-        color: #ffffff;
-        background: linear-gradient(
-          135deg,
-          #0f2027 0%,
-          #203a43 50%,
-          #2c5364 100%
-        );
-        overflow-x: hidden;
-      }
-
-      /* Header */
-      .header {
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(10px);
-        padding: 1rem 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        transition: all 0.3s ease;
-      }
-
-      .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 2rem;
-      }
-
-      .logo {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #4caf50;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .logo::before {
-        content: "🦅";
-        font-size: 2rem;
-      }
-
-      .nav-menu {
-        display: flex;
-        list-style: none;
-        gap: 2rem;
-      }
-
-      .nav-link {
-        color: #ffffff;
-        text-decoration: none;
-        padding: 0.5rem 1rem;
-        border-radius: 25px;
-        transition: all 0.3s ease;
-      }
-
-      .nav-link:hover {
-        background: rgba(76, 175, 80, 0.2);
-        color: #4caf50;
-      }
-
-      /* Hero Section */
-      .hero {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        position: relative;
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="forest" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="2" fill="%234CAF50" opacity="0.3"/></pattern></defs><rect width="100%" height="100%" fill="%23001122"/><rect width="100%" height="100%" fill="url(%23forest)"/></svg>');
-        background-size: cover;
-        background-position: center;
-      }
-
-      .hero-content {
-        max-width: 800px;
-        padding: 0 2rem;
-        animation: fadeInUp 1s ease;
-      }
-
-      .hero h1 {
-        font-size: 3.5rem;
-        margin-bottom: 1rem;
-        color: #4caf50;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      }
-
-      .hero-subtitle {
-        font-size: 1.5rem;
-        margin-bottom: 2rem;
-        opacity: 0.9;
-      }
-
-      .hero-stats {
-        display: flex;
-        justify-content: center;
-        gap: 3rem;
-        margin-top: 3rem;
-      }
-
-      .stat-item {
-        text-align: center;
-        padding: 1rem;
-        background: rgba(76, 175, 80, 0.1);
-        border-radius: 15px;
-        backdrop-filter: blur(10px);
-      }
-
-      .stat-number {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #4caf50;
-        display: block;
-      }
-
-      .stat-label {
-        font-size: 0.9rem;
-        opacity: 0.8;
-      }
-
-      .cta-button {
-        display: inline-block;
-        margin-top: 2rem;
-        padding: 1rem 2rem;
-        background: linear-gradient(45deg, #4caf50, #45a049);
-        color: white;
-        text-decoration: none;
-        border-radius: 25px;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-      }
-
-      .cta-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-      }
-
-      /* Main Content */
-      .main-content {
-        padding: 5rem 0;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      .section {
-        margin-bottom: 5rem;
-        padding: 0 2rem;
-      }
-
-      .section h2 {
-        font-size: 2.5rem;
-        text-align: center;
-        margin-bottom: 3rem;
-        color: #4caf50;
-        position: relative;
-      }
-
-      .section h2::after {
-        content: "";
-        position: absolute;
-        bottom: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80px;
-        height: 3px;
-        background: linear-gradient(45deg, #4caf50, #45a049);
-        border-radius: 2px;
-      }
-
-      /* History Timeline */
-      .timeline {
-        position: relative;
-        padding: 2rem 0;
-      }
-
-      .timeline::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 3px;
-        height: 100%;
-        background: linear-gradient(to bottom, #4caf50, #45a049);
-      }
-
-      .timeline-item {
-        display: flex;
-        margin-bottom: 3rem;
-        position: relative;
-      }
-
-      .timeline-item:nth-child(odd) {
-        flex-direction: row-reverse;
-      }
-
-      .timeline-content {
-        flex: 1;
-        padding: 2rem;
-        background: rgba(76, 175, 80, 0.1);
-        border-radius: 15px;
-        backdrop-filter: blur(10px);
-        margin: 0 2rem;
-        border: 1px solid rgba(76, 175, 80, 0.2);
-      }
-
-      .timeline-year {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #4caf50;
-        margin-bottom: 1rem;
-      }
-
-      .timeline-dot {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 20px;
-        height: 20px;
-        background: #4caf50;
-        border: 3px solid #ffffff;
-        border-radius: 50%;
-        top: 2rem;
-      }
-
-      /* Cards Grid */
-      .cards-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-top: 3rem;
-      }
-
-      .card {
-        background: rgba(76, 175, 80, 0.1);
-        border-radius: 15px;
-        padding: 2rem;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(76, 175, 80, 0.2);
-        transition: all 0.3s ease;
-        text-align: center;
-      }
-
-      .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
-      }
-
-      .card-icon {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-        display: block;
-      }
-
-      .card h3 {
-        color: #4caf50;
-        margin-bottom: 1rem;
-        font-size: 1.3rem;
-      }
-
-      /* Wildlife Gallery */
-      .wildlife-gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1rem;
-        margin-top: 3rem;
-      }
-
-      .wildlife-item {
-        position: relative;
-        height: 200px;
-        border-radius: 15px;
-        overflow: hidden;
-        background: linear-gradient(45deg, #2c5364, #4caf50);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 4rem;
-        transition: all 0.3s ease;
-      }
-
-      .wildlife-item:hover {
-        transform: scale(1.05);
-      }
-
-      .wildlife-overlay {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-        padding: 1rem;
-        color: white;
-        text-align: center;
-      }
-
-      /* Footer */
-      .footer {
-        background: rgba(0, 0, 0, 0.9);
-        padding: 3rem 0 1rem;
-        text-align: center;
-        border-top: 1px solid rgba(76, 175, 80, 0.2);
-      }
-
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 2rem;
-      }
-
-      .footer-links {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        margin-bottom: 2rem;
-        flex-wrap: wrap;
-      }
-
-      .footer-link {
-        color: #ffffff;
-        text-decoration: none;
-        padding: 0.5rem 1rem;
-        border-radius: 25px;
-        transition: all 0.3s ease;
-      }
-
-      .footer-link:hover {
-        background: rgba(76, 175, 80, 0.2);
-        color: #4caf50;
-      }
-
-      /* Animations */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .fade-in {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.6s ease;
-      }
-
-      .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .hero h1 {
-          font-size: 2.5rem;
-        }
-
-        .hero-stats {
-          flex-direction: column;
-          gap: 1rem;
-        }
-
-        .timeline::before {
-          left: 20px;
-        }
-
-        .timeline-item {
-          flex-direction: column;
-        }
-
-        .timeline-item:nth-child(odd) {
-          flex-direction: column;
-        }
-
-        .timeline-content {
-          margin-left: 3rem;
-          margin-right: 0;
-        }
-
-        .timeline-dot {
-          left: 20px;
-        }
-
-        .nav-menu {
-          display: none;
-        }
-      }
-
-      /* Scroll Progress */
-      .scroll-progress {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 0%;
-        height: 3px;
-        background: linear-gradient(45deg, #4caf50, #45a049);
-        z-index: 1001;
-        transition: width 0.3s ease;
-      }
-    </style>
+    <link rel="stylesheet" href="/styles/styles.css" />
   </head>
   <body>
-    <div class="scroll-progress" id="scrollProgress"></div>
-
-    <header class="header" id="header">
-      <nav class="nav-container">
-        <div class="logo">Wildlife Thailand</div>
-        <ul class="nav-menu">
-          <li><a href="#home" class="nav-link">หน้าแรก</a></li>
-          <li><a href="#history" class="nav-link">ประวัติ</a></li>
-          <li><a href="#importance" class="nav-link">ความสำคัญ</a></li>
-          <li><a href="#wildlife" class="nav-link">สัตว์ป่า</a></li>
-          <li><a href="#contact" class="nav-link">ติดต่อ</a></li>
-        </ul>
-      </nav>
-    </header>
-
+    <div w3-include-html="/components/navbar.html"></div>
     <main>
       <section class="hero" id="home">
         <div class="hero-content">
-          <h1>วันอนุรักษ์สัตว์ป่าแห่งชาติ</h1>
-          <p class="hero-subtitle">4 ตุลาคม ของทุกปี</p>
+          <h1>วันคุ้มครองสัตว์ป่าแห่งชาติ</h1>
+          <p class="hero-subtitle">26 ธันวาคม ของทุกปี</p>
           <p>
             วันสำคัญที่ทำให้เราตระหนักถึงคุณค่าของสัตว์ป่าและความจำเป็นในการอนุรักษ์ระบบนิเวศ
           </p>
@@ -453,7 +26,7 @@
               <span class="stat-label">ชนิดสัตว์ป่า</span>
             </div>
             <div class="stat-item fade-in">
-              <span class="stat-number">120</span>
+              <span class="stat-number">156</span>
               <span class="stat-label">อุทยานแห่งชาติ</span>
             </div>
             <div class="stat-item fade-in">
@@ -468,7 +41,7 @@
 
       <div class="main-content">
         <section class="section fade-in" id="history">
-          <h2>ความเป็นมาของวันอนุรักษ์สัตว์ป่าแห่งชาติ</h2>
+          <h2>ความเป็นมาของวันคุ้มครองสัตว์ป่าแห่งชาติ</h2>
 
           <div class="timeline">
             <div class="timeline-item">
@@ -486,10 +59,10 @@
             <div class="timeline-item">
               <div class="timeline-content">
                 <div class="timeline-year">พ.ศ. 2535</div>
-                <h3>การประกาศวันอนุรักษ์สัตว์ป่าแห่งชาติ</h3>
+                <h3>การประกาศวันคุ้มครองสัตว์ป่าแห่งชาติ</h3>
                 <p>
                   คณะรัฐมนตรีได้มีมติให้กำหนดวันที่ 4 ตุลาคม ของทุกปีเป็น
-                  "วันอนุรักษ์สัตว์ป่าแห่งชาติ"
+                  "วันคุ้มครองสัตว์ป่าแห่งชาติ"
                   เพื่อให้ประชาชนตระหนักถึงความสำคัญของสัตว์ป่าและร่วมมืออนุรักษ์
                 </p>
               </div>
@@ -528,7 +101,7 @@
 
           <div class="cards-grid">
             <div class="card">
-              <span class="card-icon">🌍</span>
+              <i class="fi fi-rr-earth-americas" style="font-size: 3rem"></i>
               <h3>สมดุลของธรรมชาติ</h3>
               <p>
                 สัตว์ป่าเป็นส่วนสำคัญในการรักษาสมดุลของระบบนิเวศ
@@ -537,16 +110,7 @@
             </div>
 
             <div class="card">
-              <span class="card-icon">💊</span>
-              <h3>แหล่งยารักษาโรค</h3>
-              <p>
-                สัตว์ป่าหลายชนิดมีสารประกอบที่สามารถนำมาพัฒนาเป็นยารักษาโรคต่าง
-                ๆ ได้ การสูญพันธุ์อาจทำให้เสียโอกาสในการค้นพบยาใหม่
-              </p>
-            </div>
-
-            <div class="card">
-              <span class="card-icon">🏛️</span>
+              <i class="fi fi-ss-bank" style="font-size: 3rem"></i>
               <h3>มูลค่าทางวัฒนธรรม</h3>
               <p>
                 สัตว์ป่าเป็นส่วนหนึ่งของวัฒนธรรมและความเชื่อของคนไทยมาอย่างยาวนาน
@@ -555,7 +119,7 @@
             </div>
 
             <div class="card">
-              <span class="card-icon">💰</span>
+              <i class="fi fi-sc-coins" style="font-size: 3rem"></i>
               <h3>มูลค่าทางเศรษฐกิจ</h3>
               <p>
                 การท่องเที่ยวเชิงนิเวศที่เกี่ยวข้องกับสัตว์ป่าสร้างรายได้ให้กับประเทศและชุมชนท้องถิ่นเป็นจำนวนมาก
@@ -569,45 +133,85 @@
 
           <div class="wildlife-gallery">
             <div class="wildlife-item">
-              🐅
+              <img
+                src="/images/tiger1.jpg"
+                alt="เสือโคร่ง"
+                class="wildlife-image"
+              />
               <div class="wildlife-overlay">
                 <h3>เสือโคร่ง</h3>
-                <p>สัตว์ประจำชาติไทย</p>
+                <p>
+                  สัตว์ประจำชาติไทย นักล่าที่ทรงพลังและสง่างามที่สุดในป่าเอเชีย
+                </p>
               </div>
             </div>
+
             <div class="wildlife-item">
-              🐘
+              <img src="/images/e1.jpg"" class="wildlife-image" />
               <div class="wildlife-overlay">
-                <h3>ช้างเอเชีย</h3>
-                <p>สัญลักษณ์แห่งความเป็นสิริมงคล</p>
+                <h3>ช้าง</h3>
+                <p>
+                  สัญลักษณ์แห่งความเป็นสิริมงคล
+                  สัตว์ที่ฉลาดและมีความผูกพันทางสังคม
+                </p>
               </div>
             </div>
+
             <div class="wildlife-item">
-              🦏
+              <img
+                src="/images/chawa.jpg"
+                alt="แรดสุมาตรา"
+                class="wildlife-image"
+              />
               <div class="wildlife-overlay">
                 <h3>แรดสุมาตรา</h3>
-                <p>สัตว์หายากที่ใกล้สูญพันธุ์</p>
+                <p>
+                  สัตว์หายากที่ใกล้สูญพันธุ์
+                  มีเพียงไม่กี่ร้อยตัวที่เหลืออยู่ในโลก
+                </p>
               </div>
             </div>
+
             <div class="wildlife-item">
-              🐆
+              <img
+                src="/images/eldsDeer.jpg"
+                alt="ละองหรือละมั่ง"
+                class="wildlife-image"
+              />
               <div class="wildlife-overlay">
-                <h3>เสือดาว</h3>
-                <p>นักล่าที่มีความสำคัญต่อระบบนิเวศ</p>
+                <h3>ละองหรือละมั่ง</h3>
+                <p>
+                  เป็นกวางขนาดกลาง มีขนสีน้ำตาลแดงตามลำตัว
+                  สีขนจะอ่อนและร่วงจนดูสั้นลงมากในช่วงฤดูร้อน
+                  ขนหยาบและยาวในฤดูหนาว
+                </p>
               </div>
             </div>
+
             <div class="wildlife-item">
-              🦅
+              <img
+                src="/images/bird1.jpeg"
+                alt="นกเงือกหัวดำ"
+                class="wildlife-image"
+              />
               <div class="wildlife-overlay">
                 <h3>นกเงือกหัวดำ</h3>
-                <p>นกที่มีบทบาทสำคัญในการกระจายพันธุ์พืช</p>
+                <p>
+                  นกที่มีบทบาทสำคัญในการกระจายพันธุ์พืช
+                  ช่วยรักษาความหลากหลายของป่า
+                </p>
               </div>
             </div>
+
             <div class="wildlife-item">
-              🐒
+              <img src="/images/cat.jpg"" alt="ชะนีตัวสีทอง"
+              class="wildlife-image" />
               <div class="wildlife-overlay">
-                <h3>ชะนีตัวสีทอง</h3>
-                <p>ลิงที่มีความสำคัญต่อระบบนิเวศป่า</p>
+                <h3>แมวลายหินอ่อน</h3>
+                <p>
+                  แมวลายหินอ่อนเป็นสัตว์ที่มีความสำคัญต่อระบบนิเวศป่า
+                  ช่วยในการกระจายเมล็ดพันธุ์พืช
+                </p>
               </div>
             </div>
           </div>
@@ -615,134 +219,13 @@
       </div>
     </main>
 
-    <footer class="footer" id="contact">
-      <div class="footer-content">
-        <div class="footer-links">
-          <a href="#" class="footer-link">เกี่ยวกับเรา</a>
-          <a href="#" class="footer-link">นโยบายความเป็นส่วนตัว</a>
-          <a href="#" class="footer-link">ติดต่อเราได้ที่</a>
-          <a href="#" class="footer-link">แจ้งปัญหา</a>
-        </div>
-        <p>&copy; 2025 วันอนุรักษ์สัตว์ป่าแห่งชาติ. สงวนลิขสิทธิ์</p>
-      </div>
-    </footer>
+    <div w3-include-html="/components/footer.html"></div>
 
+    <script src="/javascript/blog-26-script.js"></script>
+    <script src="/javascript/script.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script>
-      // Smooth scrolling
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            target.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }
-        });
-      });
-
-      // Scroll progress bar
-      window.addEventListener("scroll", () => {
-        const scrollProgress = document.getElementById("scrollProgress");
-        const scrollTop =
-          document.documentElement.scrollTop || document.body.scrollTop;
-        const scrollHeight =
-          document.documentElement.scrollHeight -
-          document.documentElement.clientHeight;
-        const scrollPercentage = (scrollTop / scrollHeight) * 100;
-        scrollProgress.style.width = scrollPercentage + "%";
-      });
-
-      // Header background change on scroll
-      window.addEventListener("scroll", () => {
-        const header = document.getElementById("header");
-        if (window.scrollY > 100) {
-          header.style.background = "rgba(0, 0, 0, 0.95)";
-        } else {
-          header.style.background = "rgba(0, 0, 0, 0.8)";
-        }
-      });
-
-      // Fade in animation on scroll
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      }, observerOptions);
-
-      document.querySelectorAll(".fade-in").forEach((el) => {
-        observer.observe(el);
-      });
-
-      // Add parallax effect to hero section
-      window.addEventListener("scroll", () => {
-        const scrolled = window.pageYOffset;
-        const hero = document.querySelector(".hero");
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-      });
-
-      // Add floating animation to wildlife items
-      document.querySelectorAll(".wildlife-item").forEach((item, index) => {
-        item.style.animationDelay = `${index * 0.2}s`;
-        item.style.animation = "float 3s ease-in-out infinite";
-      });
-
-      // Add CSS for floating animation
-      const style = document.createElement("style");
-      style.textContent = `
-            @keyframes float {
-                0%, 100% { transform: translateY(0px) scale(1); }
-                50% { transform: translateY(-10px) scale(1.02); }
-            }
-        `;
-      document.head.appendChild(style);
-
-      // Statistics counter animation
-      const animateCounters = () => {
-        const counters = document.querySelectorAll(".stat-number");
-        counters.forEach((counter) => {
-          const target = parseInt(counter.textContent.replace(/\D/g, ""));
-          const increment = target / 50;
-          let current = 0;
-
-          const updateCounter = () => {
-            if (current < target) {
-              current += increment;
-              if (counter.textContent.includes("+")) {
-                counter.textContent = Math.ceil(current) + "+";
-              } else {
-                counter.textContent = Math.ceil(current);
-              }
-              setTimeout(updateCounter, 50);
-            } else {
-              counter.textContent = counter.textContent.includes("+")
-                ? target + "+"
-                : target;
-            }
-          };
-          updateCounter();
-        });
-      };
-
-      // Trigger counter animation when hero section is visible
-      const heroObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setTimeout(animateCounters, 1000);
-            heroObserver.unobserve(entry.target);
-          }
-        });
-      });
-
-      heroObserver.observe(document.querySelector(".hero"));
+      w3.includeHTML();
     </script>
   </body>
 </html>

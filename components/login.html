@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wildlife4Life - เข้าสู่ระบบ</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Kanit", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #1a5f40 0%,
+          #0f3f2a 50%,
+          #0a2f20 100%
+        );
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Background Pattern */
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><circle cx="30" cy="30" r="2"/></g></svg>')
+          repeat;
+        z-index: 1;
+      }
+
+      .login-container {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .login-box {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        padding: 40px;
+        width: 100%;
+        max-width: 420px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        animation: slideUp 0.8s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .logo {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .logo h1 {
+        color: #1a5f40;
+        font-size: 2.5em;
+        font-weight: 600;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: #1a5f40;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2em;
+      }
+
+      .logo p {
+        color: #666;
+        font-size: 0.9em;
+        font-weight: 300;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+        position: relative;
+      }
+
+      .form-group label {
+        display: block;
+        color: #1a5f40;
+        font-weight: 500;
+        margin-bottom: 8px;
+        font-size: 0.95em;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 15px 20px;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        font-size: 1em;
+        font-family: "Kanit", sans-serif;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: #1a5f40;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(26, 95, 64, 0.1);
+      }
+
+      .form-group input::placeholder {
+        color: #999;
+        font-weight: 300;
+      }
+
+      .password-toggle {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #666;
+        cursor: pointer;
+        font-size: 1.1em;
+        padding: 5px;
+        border-radius: 4px;
+        transition: color 0.3s ease;
+      }
+
+      .password-toggle:hover {
+        color: #1a5f40;
+      }
+
+      .form-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        font-size: 0.9em;
+      }
+
+      .remember-me {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #666;
+      }
+
+      .remember-me input[type="checkbox"] {
+        width: auto;
+        margin: 0;
+      }
+
+      .forgot-password {
+        color: #1a5f40;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .forgot-password:hover {
+        color: #0f3f2a;
+      }
+
+      .login-btn {
+        width: 100%;
+        background: linear-gradient(135deg, #1a5f40 0%, #0f3f2a 100%);
+        color: white;
+        padding: 16px 24px;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1em;
+        font-weight: 500;
+        font-family: "Kanit", sans-serif;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .login-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .login-btn:hover::before {
+        left: 100%;
+      }
+
+      .login-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(26, 95, 64, 0.3);
+      }
+
+      .divider {
+        text-align: center;
+        margin: 30px 0;
+        position: relative;
+        color: #999;
+        font-size: 0.9em;
+      }
+
+      .divider::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: #e0e0e0;
+        z-index: 1;
+      }
+
+      .divider span {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 0 20px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .register-link {
+        text-align: center;
+        color: #666;
+        font-size: 0.95em;
+      }
+
+      .register-link a {
+        color: #1a5f40;
+        text-decoration: none;
+        font-weight: 500;
+        margin-left: 5px;
+        transition: color 0.3s ease;
+      }
+
+      .register-link a:hover {
+        color: #0f3f2a;
+      }
+
+      .alert {
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 0.9em;
+        display: none;
+      }
+
+      .alert.success {
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+      }
+
+      .alert.error {
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+      }
+
+      /* Responsive */
+      @media (max-width: 480px) {
+        .login-box {
+          padding: 30px 25px;
+          margin: 10px;
+        }
+
+        .logo h1 {
+          font-size: 2em;
+        }
+
+        .form-group input {
+          padding: 12px 15px;
+        }
+      }
+
+      /* Loading State */
+      .login-btn.loading {
+        position: relative;
+        color: transparent;
+      }
+
+      .login-btn.loading::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin: -10px 0 0 -10px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Wildlife decorative elements */
+      .wildlife-decoration {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: rgba(26, 95, 64, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5em;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wildlife-decoration">🐅</div>
+
+    <div class="login-container">
+      <div class="login-box">
+        <div class="logo">
+          <h1>
+            <div class="logo-icon">🌿</div>
+            Wildlife4Life
+          </h1>
+          <p>ระบบจัดการสัตว์ป่าไทย</p>
+        </div>
+
+        <div class="alert" id="alert"></div>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="username">ชื่อผู้ใช้หรือ Email</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="กรุณากรอกชื่อผู้ใช้"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">รหัสผ่าน</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="กรุณากรอกรหัsผ่าน"
+              required
+            />
+            <button
+              type="button"
+              class="password-toggle"
+              onclick="togglePassword()"
+            >
+              👁️
+            </button>
+          </div>
+
+          <div class="form-options">
+            <label class="remember-me">
+              <input type="checkbox" id="remember" name="remember" />
+              จดจำการเข้าสู่ระบบ
+            </label>
+            <a href="#" class="forgot-password">ลืมรหัสผ่าน?</a>
+          </div>
+
+          <button type="submit" class="login-btn" id="loginBtn">
+            เข้าสู่ระบบ
+          </button>
+
+          <div class="divider">
+            <span>หรือ</span>
+          </div>
+
+          <div class="register-link">
+            ยังไม่มีบัญชี? <a href="#">สมัครสมาชิก</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      // Toggle password visibility
+      function togglePassword() {
+        const passwordInput = document.getElementById("password");
+        const toggleBtn = document.querySelector(".password-toggle");
+
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          toggleBtn.innerHTML = `<i class="fi fi-rs-crossed-eye"></i>`;
+        } else {
+          passwordInput.type = "password";
+          toggleBtn.innerHTMLT = `<i class="fi fi-rr-eye"></i>`;
+        }
+      }
+
+      // Show alert message
+      function showAlert(message, type = "error") {
+        const alert = document.getElementById("alert");
+        alert.textContent = message;
+        alert.className = `alert ${type}`;
+        alert.style.display = "block";
+
+        setTimeout(() => {
+          alert.style.display = "none";
+        }, 5000);
+      }
+
+      // Handle form submission
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const loginBtn = document.getElementById("loginBtn");
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          // Basic validation
+          if (!username || !password) {
+            showAlert("กรุณากรอกชื่อผู้ใช้และรหัสผ่าน", "error");
+            return;
+          }
+
+          // Show loading state
+          loginBtn.classList.add("loading");
+          loginBtn.disabled = true;
+
+          // Simulate login process
+          setTimeout(() => {
+            // Demo credentials (in real app, this would be server-side validation)
+            if (username === "admin" && password === "admin123") {
+              showAlert("เข้าสู่ระบบสำเร็จ!", "success");
+              window.location.href = "../index.html"; // Redirect to dashboard
+              setTimeout(() => {
+                // Redirect to dashboard
+                alert("ยินดีต้อนรับสู่ Wildlife4Life Dashboard!");
+              }, 1500);
+            } else {
+              showAlert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง", "error");
+            }
+
+            // Remove loading state
+            loginBtn.classList.remove("loading");
+            loginBtn.disabled = false;
+          }, 2000);
+        });
+
+      // Add input animation
+      const inputs = document.querySelectorAll(
+        'input[type="text"], input[type="password"]'
+      );
+      inputs.forEach((input) => {
+        input.addEventListener("focus", function () {
+          this.parentElement.style.transform = "scale(1.02)";
+        });
+
+        input.addEventListener("blur", function () {
+          this.parentElement.style.transform = "scale(1)";
+        });
+      });
+
+      // Keyboard shortcuts
+      document.addEventListener("keydown", function (e) {
+        if (e.ctrlKey && e.key === "Enter") {
+          document
+            .getElementById("loginForm")
+            .dispatchEvent(new Event("submit"));
+        }
+      });
+
+      // Auto-focus username field
+      window.addEventListener("load", function () {
+        document.getElementById("username").focus();
+      });
+    </script>
+  </body>
+</html>

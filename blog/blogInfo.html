@@ -1,12 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DiscoverWild - Wildlife Adventure</title>
-    <link rel="stylesheet" href="/styles/s.css" />
+    <title>Wildlife4Life - บล็อกสัตว์ป่า</title>
+
+    <link rel="stylesheet" href="/styles/flat.css" />
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <link rel="stylesheet" href="/styles/blog-info.css" />
   </head>
   <body>
-    hr
+    <div w3-include-html="/components/navbar.html"></div>
+    <main>
+      <!-- Hero Section -->
+      <section class="hero" id="home">
+        <div class="hero-content">
+          <h1>โลกแห่งสัตว์ป่า</h1>
+          <p class="hero-subtitle">ค้นหาความมหัศจรรย์ของธรรมชาติ</p>
+          <p>
+            สำรวจโลกที่น่าอัศจรรย์ของสัตว์ป่า เรียนรู้เรื่องราวการอนุรักษ์
+            และร่วมปกป้องความหลากหลายทางชีวภาพเพื่ออนาคตที่ยั่งยืน
+          </p>
+
+          <!-- <a href="#wildlife" class="cta-button">เรียนรู้เพิ่มเติม</a> -->
+        </div>
+      </section>
+
+      <div class="main-content">
+        <!-- Blog Articles Section -->
+        <section class="section fade-in blog-articles" id="blog">
+          <h2 style="color: #28a745">บทความล่าสุด</h2>
+
+          <div class="articles-grid">
+            <article class="article-card">
+              <img
+                src="/images/tiger3.jpg"
+                alt="เสือโคร่ง"
+                class="article-image"
+              />
+              <div class="article-content">
+                <div class="article-meta">
+                  <span>📅 15 มีนาคม 2025</span>
+                  <span>👤 นักวิจัยสัตว์ป่า</span>
+                </div>
+                <h3>เสือโคร่งแห่งสุนทรภูมิ: นักล่าที่ยิ่งใหญ่</h3>
+                <p>
+                  ดึงดำดิ่งเข้าไปในโลกของเสือโคร่งเบงกอล
+                  สัตว์ประจำชาติที่ยิ่งใหญ่ ที่อาศัยอยู่ในป่าชายเลนสุนทรภูมิ...
+                </p>
+                <a href="#" class="read-more">อ่านต่อ →</a>
+              </div>
+            </article>
+
+            <article class="article-card">
+              <img
+                src="/images/elephant.jpg"
+                alt="ช้างเอเชีย"
+                class="article-image"
+              />
+              <div class="article-content">
+                <div class="article-meta">
+                  <span>📅 12 มีนาคม 2025</span>
+                  <span>👤 ผู้เชี่ยวชาญช้าง</span>
+                </div>
+                <h3>ช้างไทย: ปัญญาและความทรงจำ</h3>
+                <p>
+                  ช้างเอเชียเป็นสัตว์ที่มีสติปัญญาสูง มีความทรงจำที่ยอดเยี่ยม
+                  และเป็นสัญลักษณ์แห่งความเป็นสิริมงคล...
+                </p>
+                <a href="#" class="read-more">อ่านต่อ →</a>
+              </div>
+            </article>
+
+            <article class="article-card">
+              <img
+                src="https://images.unsplash.com/photo-1551969014-7d2c4cddf0b6?w=400&h=200&fit=crop"
+                alt="เสือดาว"
+                class="article-image"
+              />
+              <div class="article-content">
+                <div class="article-meta">
+                  <span
+                    ><i class="fi fi-br-calendar-day"></i>10 มีนาคม 2025</span
+                  >
+                  <span>👤 นักอนุรักษ์</span>
+                </div>
+                <h3>เสือดาวหิมาลัย: ผีแห่งภูเขา</h3>
+                <p>
+                  เสือดาวหิมาลัยเป็นหนึ่งในสัตว์ที่ลึกลับและหาได้ยากที่สุดในโลก
+                  อาศัยอยู่บนยอดเขาที่สูงชัน...
+                </p>
+                <a href="#" class="read-more">อ่านต่อ →</a>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+    <div w3-include-html="/components/footer.html"></div>
+    <script src="/javascript/bloginfo.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script>
+      w3.includeHTML();
+    </script>
   </body>
 </html>
