@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot สัตว์ป่าสงวนไทย</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #2c5530 0%, #4a7c59 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+      }
+
+      .chat-container {
+        width: 90%;
+        max-width: 800px;
+        height: 85vh;
+        max-height: 700px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .chat-header {
+        background: linear-gradient(45deg, #2c5530, #4a7c59);
+        color: white;
+        padding: 15px 20px;
+        text-align: center;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .chat-header::before {
+        content: "🦌";
+        font-size: 1.5em;
+        margin-right: 8px;
+      }
+
+      .chat-header h1 {
+        font-size: 1.5em;
+        display: inline;
+      }
+
+      .chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 15px;
+        background: #f8f9fa;
+        max-height: calc(85vh - 160px);
+      }
+
+      .message {
+        margin-bottom: 15px;
+        opacity: 0;
+        animation: fadeIn 0.5s ease-in forwards;
+        clear: both;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+
+      .user-message {
+        text-align: right;
+      }
+
+      .bot-message {
+        text-align: left;
+      }
+
+      .message-content {
+        display: inline-block;
+        max-width: 85%;
+        padding: 12px 16px;
+        border-radius: 18px;
+        word-wrap: break-word;
+        line-height: 1.4;
+      }
+
+      .user-message .message-content {
+        background: #007bff;
+        color: white;
+      }
+
+      .bot-message .message-content {
+        background: white;
+        color: #333;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .animal-info {
+        background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        border-radius: 12px;
+        padding: 15px;
+        margin: 8px 0;
+        border-left: 4px solid #4a7c59;
+        width: 100%;
+      }
+
+      .animal-name {
+        font-size: 1.3em;
+        font-weight: bold;
+        color: #2c5530;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      .animal-image {
+        width: 100%;
+        max-width: 250px;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin: 8px auto;
+        border: 2px solid #4a7c59;
+        display: block;
+      }
+
+      .info-section {
+        margin: 8px 0;
+        clear: both;
+      }
+
+      .info-label {
+        font-weight: bold;
+        color: #2c5530;
+        margin-bottom: 4px;
+        font-size: 0.95em;
+      }
+
+      .info-text {
+        line-height: 1.5;
+        color: #555;
+        font-size: 0.9em;
+        text-align: left;
+      }
+
+      .suggestions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 10px 0;
+        justify-content: center;
+      }
+
+      .suggestion-chip {
+        background: #e8f5e8;
+        color: #2c5530;
+        padding: 6px 12px;
+        border-radius: 16px;
+        cursor: pointer;
+        font-size: 13px;
+        border: 1px solid #4a7c59;
+        transition: all 0.3s ease;
+      }
+
+      .suggestion-chip:hover {
+        background: #4a7c59;
+        color: white;
+        transform: translateY(-1px);
+      }
+
+      .chat-input-container {
+        padding: 15px;
+        background: white;
+        border-top: 1px solid #e0e0e0;
+        flex-shrink: 0;
+      }
+
+      .input-group {
+        display: flex;
+        gap: 8px;
+      }
+
+      .chat-input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 20px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+
+      .chat-input:focus {
+        border-color: #4a7c59;
+      }
+
+      .send-button {
+        background: linear-gradient(45deg, #2c5530, #4a7c59);
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .send-button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(76, 124, 89, 0.4);
+      }
+
+      .typing-indicator {
+        display: none;
+        padding: 8px 15px;
+        font-style: italic;
+        color: #666;
+        font-size: 14px;
+      }
+
+      .typing-dot {
+        animation: typing 1.4s infinite;
+        opacity: 0;
+      }
+
+      .typing-dot:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .typing-dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .typing-dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes typing {
+        0%,
+        60%,
+        100% {
+          opacity: 0;
+        }
+        30% {
+          opacity: 1;
+        }
+      }
+
+      .status-indicator {
+        position: absolute;
+        top: 12px;
+        right: 15px;
+        width: 10px;
+        height: 10px;
+        background: #28a745;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      /* แก้ไขปัญหาการแสดงผลบนมือถือ */
+      @media (max-width: 768px) {
+        body {
+          padding: 5px;
+        }
+
+        .chat-container {
+          width: 95%;
+          height: 90vh;
+        }
+
+        .message-content {
+          max-width: 90%;
+          font-size: 14px;
+        }
+
+        .animal-image {
+          max-width: 100%;
+          height: 140px;
+        }
+
+        .chat-header h1 {
+          font-size: 1.3em;
+        }
+
+        .suggestions {
+          justify-content: flex-start;
+        }
+
+        .suggestion-chip {
+          font-size: 12px;
+          padding: 5px 10px;
+        }
+      }
+
+      /* แก้ไขปัญหา scrolling */
+      .chat-messages::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .chat-messages::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+      }
+
+      .chat-messages::-webkit-scrollbar-thumb {
+        background: #4a7c59;
+        border-radius: 3px;
+      }
+
+      .chat-messages::-webkit-scrollbar-thumb:hover {
+        background: #2c5530;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="status-indicator"></div>
+        <h1>Chatbot สัตว์ป่าสงวนไทย</h1>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="message bot-message">
+          <div class="message-content">
+            สวัสดีครับ! 🦌 ยินดีต้อนรับสู่ระบบสอบถามข้อมูลสัตว์ป่าสงวนไทย<br />
+            คุณสามารถถามเกี่ยวกับสัตว์ป่าหายากต่างๆ ได้เลยครับ
+            <div class="suggestions">
+              <div class="suggestion-chip" onclick="sendSuggestion('ละอง')">
+                ละอง
+              </div>
+              <div
+                class="suggestion-chip"
+                onclick="sendSuggestion('เสือโคร่ง')"
+              >
+                เสือโคร่ง
+              </div>
+              <div class="suggestion-chip" onclick="sendSuggestion('แรด')">
+                แรด
+              </div>
+              <div class="suggestion-chip" onclick="sendSuggestion('ช้างป่า')">
+                ช้างป่า
+              </div>
+              <div class="suggestion-chip" onclick="sendSuggestion('เก้ง')">
+                เก้ง
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="typing-indicator" id="typingIndicator">
+        🤖 กำลังค้นหาข้อมูล<span class="typing-dot">.</span
+        ><span class="typing-dot">.</span><span class="typing-dot">.</span>
+      </div>
+
+      <div class="chat-input-container">
+        <div class="input-group">
+          <input
+            type="text"
+            id="chatInput"
+            class="chat-input"
+            placeholder="ถามเกี่ยวกับสัตว์ป่าสงวน เช่น ละอง, เสือโคร่ง, แรด..."
+          />
+          <button id="sendButton" class="send-button">ส่ง</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ฐานข้อมูลสัตว์ป่าสงวน
+      const animalDatabase = {
+        ละอง: {
+          name: "ละอง (ละมั่ง)",
+          scientificName: "Capricornis sumatraensis",
+          image:
+            "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM2ZDRjNDE7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzNlMmUyNDtzdG9wLW9wYWNpdHk6MSIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8dGV4dCB4PSI1MCUiIHk9IjQwJSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjMyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+kjuC4peC4sOC4reC4hzwvdGV4dD4KICA8dGV4dCB4PSI1MCUiIHk9IjYwJSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjZGRkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5DYXByaWNvcm5pcyBzdW1hdHJhZW5zaXM8L3RleHQ+Cjwvc3ZnPg==",
+          habitat:
+            "ป่าเขตร้อนชื้น ป่าดิบเขา และป่าเบญจพรรณ ในเขตภาคเหนือและภาคตะวันตกของประเทศไทย",
+          characteristics:
+            "สัตว์กีบเท้าคู่ขนาดกลาง มีขนสีน้ำตาลเข้มถึงดำ มีเขาสั้นและแหลม ตัวผู้มีขนาดใหญ่กว่าตัวเมีย น้ำหนักประมาณ 50-140 กิโลกรัม",
+          behavior:
+            "เป็นสัตว์ที่อาศัยอยู่ตามไหล่เขาและหน้าผา มีนิสัยเขี้ยวขาด สามารถปีนเขาได้เก่ง กินพืชเป็นอาหาร",
+          conservation:
+            "สถานภาพ: ใกล้สูญพันธุ์ (Near Threatened) ตามเกณฑ์ IUCN ประชากรลดลงอย่างต่อเนื่องเนื่องจากการล่าและการทำลายถิ่นที่อยู่อาศัย",
+          distribution:
+            "พบในเทือกเขาตะนาวศรี เขตรักษาพันธุ์สัตว์ป่าห้วยขาแข้ง และอุทยานแห่งชาติต่างๆ ในภาคตะวันตก",
+        },
+        เสือโคร่ง: {
+          name: "เสือโคร่ง",
+          scientificName: "Panthera tigris",
+          image:
+            "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0idGlnZXIiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZmY4ODAwO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNkZDUwMDA7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3RpZ2VyKSIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iNDAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzIiIGZpbGw9ImJsYWNrIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7wn5Kv4LmA4Liq4Li34Lit4LmC4LiB4Lij4LmI4LiHPC90ZXh0PgogIDx0ZXh0IHg9IjUwJSIgeT0iNjAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9ImJsYWNrIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5QYW50aGVyYSB0aWdyaXM8L3RleHQ+Cjwvc3ZnPg==",
+          habitat:
+            "ป่าดิบแล้ง ป่าเบญจพรรณ และป่าโปร่ง ในเขตรักษาพันธุ์สัตว์ป่าและอุทยานแห่งชาติ",
+          characteristics:
+            "สัตว์เลี้ยงลูกด้วยนมขนาดใหญ่ มีลายดำบนขนสีส้ม ตัวผู้มีน้ำหนักถึง 300 กิโลกรัม เป็นนักล่าที่มีพลังมาก",
+          behavior:
+            "เป็นสัตว์เดี่ยว ออกหาอาหารตอนกลางคืนเป็นหลัก ชอบน้ำและว่ายน้ำได้ดี มีอาณาเขตกว้างใหญ่",
+          conservation:
+            "สถานภาพ: สูญพันธุ์ในท้องถิ่น (Locally Extinct) ในปัจจุบันไม่มีเสือโคร่งป่าในประเทศไทยแล้ว เสือตัวสุดท้ายถูกพบเห็นเมื่อปี 2013",
+          distribution:
+            "เคยพบในป่าตะวันตกและตอนใต้ของประเทศไทย ปัจจุบันสูญพันธุ์แล้ว มีเพียงเสือโคร่งในสวนสัตว์เท่านั้น",
+        },
+        แรด: {
+          name: "แรดสุมาตรา",
+          scientificName: "Dicerorhinus sumatrensis",
+          image:
+            "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0icmhpbm8iIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNjY2NjY2O3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM0NDQ0NDQ7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3JoaW5vKSIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iNDAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzIiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7wn6WP4LmB4LKj4LiUPC90ZXh0PgogIDx0ZXh0IHg9IjUwJSIgeT0iNjAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5EaWNlcm9yaGludXMgc3VtYXRyYWVuc2lzPC90ZXh0Pgo8L3N2Zz4=",
+          habitat:
+            "ป่าดิบชื้นในเขตภาคใต้ของประเทศไทย โดยเฉพาะในจังหวัดยะลา นราธิวาส และปัตตานี",
+          characteristics:
+            "แรดขนาดเล็กที่สุดในโลก มีขนสีน้ำตาลแดง มีนอสองอัน น้ำหนักประมาณ 500-1000 กิโลกรัม มีผิวหนังหยาบและมีรอยย่น",
+          behavior:
+            "ชอบอาบโคลนและน้ำ กินพืชเป็นอาหาร เป็นสัตว์เดี่ยว มีนิสัยเขี้ยวขาดเมื่อถูกคุกคาม",
+          conservation:
+            "สถานภาพ: สูญพันธุ์ในท้องถิ่น (Locally Extinct) แรดสุมาตราตัวสุดท้ายในไทยตายไปเมื่อปี 2019",
+          distribution:
+            "เคยพบในป่าใต้ของไทย โดยเฉพาะในอุทยานแห่งชาติบูโดและบาเล่ ปัจจุบันสูญพันธุ์แล้วในประเทศไทย",
+        },
+        ช้างป่า: {
+          name: "ช้างป่าเอเชีย",
+          scientificName: "Elephas maximus",
+          image:
+            "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZWxlcGhhbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojOTA5MDkwO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA <c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM2MDYwNjA7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2VsZXBoYW50KSIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iNDAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzIiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7wn5GY4LiK4LmJ4Liy4LiH4Lib4LmI4LiyPC90ZXh0PgogIDx0ZXh0IHg9IjUwJSIgeT0iNjAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5FbGVwaGFzIG1heGltdXM8L3RleHQ+Cjwvc3ZnPg==",
+          habitat:
+            "ป่าดิบแล้ง ป่าเบญจพรรณ และป่าโปร่ง ในอุทยานแห่งชาติและเขตรักษาพันธุ์สัตว์ป่าทั่วประเทศ",
+          characteristics:
+            "สัตว์เลี้ยงลูกด้วยนมขนาดใหญ่ที่สุดบนบก มีงวงยาว หูใหญ่ ตัวผู้บางตัวมีงาช้าง น้ำหนักได้ถึง 5 ตัน",
+          behavior:
+            "อาศัยอยู่เป็นฝูง นำโดยแม่ช้างแก่ กินพืชเป็นอาหาร ใช้น้ำวันละมาก ต้องเดินทางหาอาหารและน้ำตลอดเวลา",
+          conservation:
+            "สถานภาพ: ใกล้สูญพันธุ์ (Endangered) ประชากรประมาณ 3,000-4,000 ตัวในป่าไทย ปัญหาหลักคือการบุกรุกที่อยู่อาศัยและความขัดแย้งกับคน",
+          distribution:
+            "อุทยานแห่งชาติเขาใหญ่ ควายป่า กุยบุรี ผาแต้ม และเขตรักษาพันธุ์สัตว์ป่าต่างๆ ทั่วประเทศ",
+        },
+        เก้ง: {
+          name: "เก้ง",
+          scientificName: "Muntiacus muntjak",
+          image:
+            "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZGVlciIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM4QjQ1MTM7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzVEMjQwQTtzdG9wLW9wYWNpdHk6MSIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZGVlcikiLz4KICA8dGV4dCB4PSI1MCUiIHk9IjQwJSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjMyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+kjOC5gOC4geC5ieC4hzwvdGV4dD4KICA8dGV4dCB4PSI1MCUiIHk9IjYwJSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjZGRkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5NdW50aWFjdXMgbXVudGphazwvdGV4dD4KPC9zdmc+",
+          habitat:
+            "ป่าดิบแล้ง ป่าเบญจพรรณ ป่าโปร่ง และป่าไผ่ในเขตอุทยานแห่งชาติและป่าสงวนทั่วประเทศ",
+          characteristics:
+            "กวางขนาดเล็ก สูงประมาณ 50 ซม. มีขนสีน้ำตาลแดง ตัวผู้มีเขาเล็กและเขี้ยวยื่นออกมา มีต่อมกลิ่นใต้ตา",
+          behavior:
+            "เป็นสัตว์เดี่ยว ออกหาอาหารตอนเช้าและเย็น กินใบไม้ ผลไม้ และยอดอ่อน มีเสียงเรียกที่ดังและเป็นจังหวะ",
+          conservation:
+            "สถานภาพ: ไม่ใกล้สูญพันธุ์ (Least Concern) แต่ประชากรลดลงจากการล่าและการทำลายป่า",
+          distribution:
+            "พบทั่วไปในป่าไทยที่ยังคงความสมบูรณ์ เช่น อุทยานแห่งชาติเขาใหญ่ ดอยอินทนนท์ และป่าทั่วไป",
+        },
+      };
+
+      // ค้นหาสัตว์จากคำค้นหา
+      function searchAnimal(query) {
+        const lowerQuery = query.toLowerCase().trim();
+
+        // ค้นหาแบบตรงเป๊ะ
+        for (let key in animalDatabase) {
+          if (
+            key.toLowerCase() === lowerQuery ||
+            animalDatabase[key].name.toLowerCase().includes(lowerQuery) ||
+            animalDatabase[key].scientificName
+              .toLowerCase()
+              .includes(lowerQuery)
+          ) {
+            return animalDatabase[key];
+          }
+        }
+
+        // ค้นหาแบบใกล้เคียง
+        for (let key in animalDatabase) {
+          if (
+            key.toLowerCase().includes(lowerQuery) ||
+            animalDatabase[key].name.toLowerCase().includes(lowerQuery)
+          ) {
+            return animalDatabase[key];
+          }
+        }
+
+        return null;
+      }
+
+      // แสดงข้อมูลสัตว์
+      function displayAnimalInfo(animal) {
+        return `
+                <div class="animal-info">
+                    <div class="animal-name">${animal.name}</div>
+                    <img src="${animal.image}" alt="${animal.name}" class="animal-image">
+                    
+                    <div class="info-section">
+                        <div class="info-label">🔬 ชื่อวิทยาศาสตร์:</div>
+                        <div class="info-text">${animal.scientificName}</div>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-label">🏞️ ถิ่นที่อยู่อาศัย:</div>
+                        <div class="info-text">${animal.habitat}</div>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-label">📝 ลักษณะทั่วไป:</div>
+                        <div class="info-text">${animal.characteristics}</div>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-label">🐾 พฤติกรรม:</div>
+                        <div class="info-text">${animal.behavior}</div>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-label">⚠️ สถานภาพการอนุรักษ์:</div>
+                        <div class="info-text">${animal.conservation}</div>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-label">📍 การกระจายพันธุ์:</div>
+                        <div class="info-text">${animal.distribution}</div>
+                    </div>
+                </div>
+            `;
+      }
+
+      // เพิ่มข้อความในแชท
+      function addMessage(content, isUser = false) {
+        const messagesContainer = document.getElementById("chatMessages");
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `message ${
+          isUser ? "user-message" : "bot-message"
+        }`;
+
+        messageDiv.innerHTML = `<div class="message-content">${content}</div>`;
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+
+      // แสดงตัวบ่งชี้การพิมพ์
+      function showTypingIndicator() {
+        document.getElementById("typingIndicator").style.display = "block";
+        const chatMessages = document.getElementById("chatMessages");
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      // ซ่อนตัวบ่งชี้การพิมพ์
+      function hideTypingIndicator() {
+        document.getElementById("typingIndicator").style.display = "none";
+      }
+
+      // ประมวลผลข้อความ
+      function processMessage(message) {
+        const animal = searchAnimal(message);
+
+        if (animal) {
+          return displayAnimalInfo(animal);
+        } else {
+          const responses = [
+            `ขออภัยครับ ไม่พบข้อมูลเกี่ยวกับ "${message}" ในฐานข้อมูล<br><br>ลองถามเกี่ยวกับสัตว์เหล่านี้ดูครับ:`,
+            `ไม่มีข้อมูลเกี่ยวกับ "${message}" ในระบบครับ<br><br>คุณสามารถสอบถามเกี่ยวกับ:`,
+            `หาข้อมูล "${message}" ไม่พบครับ<br><br>ลองค้นหาสัตว์เหล่านี้แทน:`,
+          ];
+
+          const randomResponse =
+            responses[Math.floor(Math.random() * responses.length)];
+
+          return `${randomResponse}
+                    <div class="suggestions">
+                        <div class="suggestion-chip" onclick="sendSuggestion('ละอง')">ละอง</div>
+                        <div class="suggestion-chip" onclick="sendSuggestion('เสือโคร่ง')">เสือโคร่ง</div>
+                        <div class="suggestion-chip" onclick="sendSuggestion('แรด')">แรดสุมาตรา</div>
+                        <div class="suggestion-chip" onclick="sendSuggestion('ช้างป่า')">ช้างป่า</div>
+                        <div class="suggestion-chip" onclick="sendSuggestion('เก้ง')">เก้ง</div>
+                    </div>`;
+        }
+      }
+
+      // ส่งข้อความ
+      function sendMessage() {
+        const input = document.getElementById("chatInput");
+        const message = input.value.trim();
+
+        if (message === "") return;
+
+        // แสดงข้อความของผู้ใช้
+        addMessage(message, true);
+        input.value = "";
+
+        // แสดงตัวบ่งชี้การพิมพ์
+        showTypingIndicator();
+
+        // จำลองการประมวลผล
+        setTimeout(() => {
+          hideTypingIndicator();
+          const response = processMessage(message);
+          addMessage(response);
+        }, 1200 + Math.random() * 800);
+      }
+
+      // ส่งข้อความแนะนำ
+      function sendSuggestion(suggestion) {
+        document.getElementById("chatInput").value = suggestion;
+        sendMessage();
+      }
+
+      // Event Listeners
+      document
+        .getElementById("sendButton")
+        .addEventListener("click", sendMessage);
+
+      document
+        .getElementById("chatInput")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            sendMessage();
+          }
+        });
+
+      // เพิ่มข้อความต้อนรับพิเศษ
+      setTimeout(() => {
+        addMessage(`
+                <strong>💡 เคล็ดลับการใช้งาน:</strong><br>
+                • พิมพ์ชื่อสัตว์ที่ต้องการทราบข้อมูล<br>
+                • ระบบรองรับทั้งชื่อไทยและชื่อวิทยาศาสตร์<br>
+                • คลิกที่ปุ่มแนะนำเพื่อดูตัวอย่าง<br><br>
+                <em>ข้อมูลอัปเดต: กันยายน 2025</em>
+            `);
+      }, 1500);
+    </script>
+  </body>
+</html>
