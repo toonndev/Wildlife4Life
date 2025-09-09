@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="th">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ติดต่อเรา - WildlifeTH</title>
+     <link rel="stylesheet" href="/styles/flat.css" />
+   
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #000000;
+        color: white;
+        min-height: 100vh;
+      }
+
+      .header {
+        background: rgba(0, 0, 0, 0.8);
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+      }
+
+      .main-content {
+        margin-top: 80px;
+        padding: 4rem 2rem;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .contact-hero {
+        text-align: center;
+        margin-bottom: 4rem;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url('./images/twoDeer.jpg')
+            center/cover;
+        padding: 4rem 2rem;
+        border-radius: 20px;
+        margin-bottom: 3rem;
+      }
+
+      .contact-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #fff;
+      }
+
+      .contact-hero p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        margin-top: 3rem;
+      }
+
+      .contact-info {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 3rem;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .contact-info h2 {
+        color: #f39c12;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .contact-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+      }
+
+      .contact-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(45deg, #e74c3c, #c0392b);
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        font-size: 2rem;
+      }
+
+      .contact-form {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 3rem;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .contact-form h2 {
+        color: #f39c12;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+      }
+
+      .form-group {
+        margin-bottom: 2rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #fff;
+        font-weight: 500;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: white;
+        font-size: 1rem;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #e74c3c;
+        box-shadow: 0 0 15px rgba(231, 76, 60, 0.3);
+      }
+
+      .form-group input::placeholder,
+      .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .submit-btn {
+        background: linear-gradient(45deg, #e74c3c, #c0392b);
+        color: white;
+        padding: 1rem 3rem;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+        width: 100%;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
+      }
+
+      .map-section {
+        margin-top: 4rem;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 3rem;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+       display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .map-section h2 {
+        color: #e74c3c;
+        margin-bottom: 2rem;
+        text-align: center;
+        font-size: 2rem;
+      }
+
+      .map-placeholder {
+        width: 100%;
+        height: 400px;
+        background: linear-gradient(45deg, #2c3e50, #34495e);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+      }
+
+
+ 
+
+      @media (max-width: 768px) {
+        .contact-container {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .contact-hero h1 {
+          font-size: 2rem;
+        }
+
+        .nav-menu {
+          display: none;
+        }
+      }
+    </style>
+     <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+     <div w3-include-html="components/navbar.html"></div>
+    <main class="main-content">
+      <div class="contact-hero">
+        <h1>ติดต่อเรา</h1>
+        <p>
+          เราพร้อมให้บริการและตอบข้อสงสัยของคุณเกี่ยวกับการท่องเที่ยวเชิงนิเวศและการอนุรักษ์สัตว์ป่า
+          ติดต่อเราได้ทุกช่องทาง
+        </p>
+      </div>
+
+      <div class="contact-container">
+        <div class="contact-info">
+          <h2>ข้อมูลติดต่อ</h2>
+
+         
+        <div class="contact-item">
+            <div class="contact-icon"><i class="fi fi-sr-marker"></i></div>
+            <div>
+             <h3>ที่อยู่</h3>
+              <p>123 ถนนสุขุมวิท แขวงคลองตัน </p> เขตคลองตัน กรุงเทพฯ 10110</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fi fi-sr-phone-call"></i></div>
+            <div>
+              <h3>โทรศัพท์</h3>
+              <p>02-123-4567<br />089-123-4567</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fi fi-ss-envelope"></i></div>
+            <div>
+              <h3>อีเมล</h3>
+              <p>info@wildlifeth.com<br />tours@wildlifeth.com</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fi fi-sr-clock-three"></i></div>
+            <div>
+              <h3>เวลาทำการ</h3>
+              <p>
+                จันทร์ - ศุกร์: 08:00 - 18:00<br />เสาร์ - อาทิตย์: 09:00 -
+                17:00
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form">
+          <h2>ส่งข้อความถึงเรา</h2>
+
+          <div class="form-group">
+            <label for="name">ชื่อ-นามสกุล *</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="กรุณาระบุชื่อของคุณ"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">อีเมล *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="example@email.com"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">เบอร์โทรศัพท์</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="08x-xxx-xxxx"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="subject">หัวข้อ *</label>
+            <select id="subject" name="subject" required>
+              <option value="">เลือกหัวข้อ</option>
+              <option value="tour">สอบถามทัวร์</option>
+              <option value="booking">จองทัวร์</option>
+              <option value="wildlife">สอบถามเกี่ยวกับสัตว์ป่า</option>
+              <option value="conservation">การอนุรักษ์</option>
+              <option value="other">อื่นๆ</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">ข้อความ *</label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              placeholder="กรุณาระบุรายละเอียดที่ต้องการสอบถาม..."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">ส่งข้อความ</button>
+        </form>
+      </div>
+
+      <div class="map-section">
+        <h2 style="padding-top:15px; padding-bottom:30px; position: fixed; top: 5%; left: 50%; transform: translate(-50%, -50%); text-align: center;">แผนที่</h2>
+       <iframe style="margin-top:15px; margin-bottom:15px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d142271.4011567914!2d100.33016478163233!3d13.832561108152833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29d217330c239%3A0xdd0648eb49a9f424!2z4Liq4Liz4LiZ4Lix4LiB4Lit4Li44LiX4Lii4Liy4LiZ4LmB4Lir4LmI4LiH4LiK4Liy4LiV4Li0!5e0!3m2!1sth!2sth!4v1757437275643!5m2!1sth!2sth" width="1000" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </main>
+
+
+    <script>
+      // Form submission handling
+      document
+        .querySelector(".contact-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Simple form validation
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const subject = document.getElementById("subject").value;
+          const message = document.getElementById("message").value;
+
+          if (!name || !email || !subject || !message) {
+            alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+            return;
+          }
+
+          // Simulate form submission
+          alert("ขอบคุณที่ติดต่อเรา! เราจะตอบกลับให้คุณภายใน 24 ชั่วโมง");
+          this.reset();
+        });
+
+      // Smooth scrolling for navigation
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // Add some interactive effects
+      document.querySelectorAll(".contact-item").forEach((item) => {
+        item.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-5px) scale(1.02)";
+        });
+
+        item.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0) scale(1)";
+        });
+      });
+    </script>
+
+    <div w3-include-html="components/footer.html"></div>
+    <script src="/javascript/script.js"></script>
+    <script src="/javascript/slider.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script>
+      w3.includeHTML();
+    </script>
+  </body>
+</html>

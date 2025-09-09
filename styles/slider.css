@@ -234,10 +234,10 @@ body {
   transition: all 0.3s ease;
 }
 
-.social-link:hover {
+/* .social-link:hover {
   background: #ffa500;
   transform: scale(1.1);
-}
+} */
 
 /* Slider Controls Component */
 .slider-controls {

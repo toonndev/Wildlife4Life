@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>สมัครเข้าร่วมโครงการอาสา - WildlifeLife</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Kanit", "Arial", sans-serif;
+        /*background: linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #f8f9fa 50%,
+          #ffffff 100%
+        );*/
+        background: #000000;
+
+        color: #333333;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 50px;
+        padding: 40px 0;
+      }
+
+      .header h1 {
+        font-size: 3em;
+        color: #ffa500;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .header p {
+        font-size: 1.2em;
+        color: #fff;
+        opacity: 0.9;
+      }
+
+      .projects-section {
+        margin-bottom: 60px;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5em;
+        color: #fff;
+        margin-bottom: 40px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .register-section-title {
+        text-align: center;
+        font-size: 2.5em;
+        color: #1a4a1e;
+        margin-bottom: 40px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+      }
+
+      .project-card {
+        background: linear-gradient(145deg, #ffffff, #f8f9fa);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 2px solid #e9ecef;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #ff6b6b, #ffa500);
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        border-color: #ff6b6b;
+      }
+
+      .project-card input[type="checkbox"] {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 20px;
+        height: 20px;
+        accent-color: #ff6b6b;
+      }
+
+      .project-image {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+        object-fit: cover;
+        margin-bottom: 15px;
+      }
+
+      .project-card h3 {
+        color: #ff6b6b;
+        font-size: 1.4em;
+        margin-bottom: 15px;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .project-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+      }
+
+      .project-card p {
+        color: #1a4a1e;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      .project-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px solid #e9ecef;
+      }
+
+      .duration {
+        background: rgba(255, 165, 0, 0.2);
+        color: #ffa500;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        font-weight: bold;
+      }
+
+      .location {
+        color: #1a4a1e;
+        font-size: 0.9em;
+      }
+
+      .form-section {
+        background: linear-gradient(145deg, #ffffff, #f8f9fa);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        margin-bottom: 40px;
+        border: 1px solid #e9ecef;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-group label {
+        display: block;
+        color: #1a4a1e;
+        font-weight: bold;
+        margin-bottom: 8px;
+        font-size: 1.1em;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        background: #ffffff;
+        color: #333333;
+        font-size: 1em;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #ff6b6b;
+        box-shadow: 0 0 15px rgba(255, 107, 107, 0.2);
+      }
+
+      .radio-group {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+
+      .radio-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .radio-item input[type="radio"] {
+        width: auto;
+        accent-color: #ff6b6b;
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .checkbox-group input[type="checkbox"] {
+        width: auto;
+        accent-color: #ff6b6b;
+      }
+
+      .submit-btn {
+        background: linear-gradient(135deg, #ff6b6b, #ffa500);
+        color: white;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: block;
+        margin: 30px auto 0;
+        box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 25px rgba(255, 107, 107, 0.4);
+      }
+
+      .result-section {
+        display: none;
+        background: linear-gradient(145deg, #ffffff, #f8f9fa);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        margin-top: 40px;
+        border: 1px solid #e9ecef;
+      }
+
+      .result-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      .result-table th,
+      .result-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .result-table th {
+        background: rgba(255, 165, 0, 0.2);
+        color: #ffa500;
+        font-weight: bold;
+      }
+
+      .result-table td {
+        color: #1a4a1e;
+      }
+
+      .success-message {
+        background: linear-gradient(135deg, #1a4a1e, #2d7a2d);
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        font-size: 1.2em;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 20px rgba(26, 74, 30, 0.3);
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2.2em;
+        }
+
+        .section-title {
+          font-size: 2em;
+        }
+        .register-section-title {
+          font-size: 2em;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .radio-group {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>โครงการอาสาคุ้มครองสัตว์ป่า</h1>
+        <p>เข้าร่วมเป็นส่วนหนึ่งในการอนุรักษ์ธรรมชาติและสัตว์ป่าไทย</p>
+      </div>
+
+      <div class="projects-section">
+        <h2 class="section-title">เลือกโครงการที่ต้องการเข้าร่วม</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <input
+              type="checkbox"
+              name="projects"
+              value="tiger-conservation"
+              id="project1"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1551969014-7d2c4cddf0b6?w=400&h=200&fit=crop"
+              alt="เสือโคร่ง"
+              class="project-image"
+            />
+            <h3>โครงการอนุรักษ์เสือโคร่ง</h3>
+            <p>
+              ร่วมเป็นส่วนหนึ่งในการปกป้องและอนุรักษ์เสือโคร่งในพื้นที่ป่าสงวนแห่งชาติ
+              การสำรวจประชากร การติดตามพฤติกรรม และการเฝ้าระวังการลักลอบล่า
+            </p>
+            <div class="project-details">
+              <span class="duration">6 เดือน</span>
+              <span class="location">📍 เขตรักษาพันธุ์สัตว์ป่าห้วยขาแข้ง</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <input
+              type="checkbox"
+              name="projects"
+              value="elephant-protection"
+              id="project2"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=400&h=200&fit=crop"
+              alt="ช้างป่า"
+              class="project-image"
+            />
+            <h3>โครงการคุ้มครองช้างป่า</h3>
+            <p>
+              ปกป้องช้างป่าไทยจากการถูกทำร้ายและการบุกรุกที่อยู่อาศัย
+              ช่วยดูแลช้างที่ได้รับบาดเจ็บ
+              และสร้างความตระหนักรู้แก่ชุมชนท้องถิ่น
+            </p>
+            <div class="project-details">
+              <span class="duration">8 เดือน</span>
+              <span class="location">📍 อุทยานแห่งชาติเขาใหญ่</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <input
+              type="checkbox"
+              name="projects"
+              value="bird-monitoring"
+              id="project3"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1444464666168-49d633b86797?w=400&h=200&fit=crop"
+              alt="นกป่า"
+              class="project-image"
+            />
+            <h3>โครงการติดตามนกป่าไทย</h3>
+            <p>
+              สำรวจและบันทึกข้อมูลความหลากหลายของนกป่าไทย
+              การอนุรักษ์แหล่งที่อยู่อาศัย และการศึกษาเส้นทางการอพยพของนกป่า
+            </p>
+            <div class="project-details">
+              <span class="duration">4 เดือน</span>
+              <span class="location">📍 อุทยานแห่งชาติดอยอินทนนท์</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <input
+              type="checkbox"
+              name="projects"
+              value="marine-conservation"
+              id="project4"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=200&fit=crop"
+              alt="เต่าทะเล"
+              class="project-image"
+            />
+            <h3>โครงการอนุรักษ์สัตว์ทะเล</h3>
+            <p>
+              ปกป้องเต่าทะเล ปะการัง และสัตว์ทะเลหายาก การทำความสะอาดชายหาด
+              และการศึกษาผลกระทบของขยะพลาสติกต่อระบบนิเวศทางทะเล
+            </p>
+            <div class="project-details">
+              <span class="duration">5 เดือน</span>
+              <span class="location">📍 อุทยานแห่งชาติหมู่เกอะสุรินทร์</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <input
+              type="checkbox"
+              name="projects"
+              value="forest-restoration"
+              id="project5"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=200&fit=crop"
+              alt="ป่าไผ่"
+              class="project-image"
+            />
+            <h3>โครงการฟื้นฟูป่าไผ่</h3>
+            <p>
+              ปลูกและดูแลป่าไผ่เพื่อป้องกันการพังทลายของดิน
+              สร้างแหล่งอาหารธรรมชาติสำหรับสัตว์ป่า
+              และฟื้นฟูระบบนิเวศป่าที่เสื่อมโทรม
+            </p>
+            <div class="project-details">
+              <span class="duration">7 เดือน</span>
+              <span class="location">📍 อุทยานแห่งชาติภูกระดึง</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <input
+              type="checkbox"
+              name="projects"
+              value="primate-research"
+              id="project6"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=400&h=200&fit=crop"
+              alt="ลิงป่า"
+              class="project-image"
+            />
+            <h3>
+              <img
+                src="https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=50&h=50&fit=crop&crop=center"
+                alt="ลิงป่า"
+                class="project-icon"
+              />
+              โครงการวิจัยไพรเมทป่า
+            </h3>
+            <p>
+              ศึกษาพฤติกรรมและระบบนิเวศของลิงและวานรป่าไทย การอนุรักษ์พันธุกรรม
+              และการป้องกันการสูญพันธุ์ของไพรเมทหายาก
+            </p>
+            <div class="project-details">
+              <span class="duration">9 เดือน</span>
+              <span class="location">📍 อุทยานแห่งชาติแก่งกระจาน</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form id="volunteerForm" class="form-section">
+        <h2 class="register-section-title">แบบฟอร์มลงทะเบียน</h2>
+        <div class="form-grid">
+          <div class="form-column">
+            <div class="form-group">
+              <label for="fullName">ชื่อ-นามสกุล *</label>
+              <input type="text" id="fullName" name="fullName" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">อีเมล *</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">เบอร์โทรศัพท์ *</label>
+              <input type="tel" id="phone" name="phone" required />
+            </div>
+
+            <div class="form-group">
+              <label for="age">อายุ *</label>
+              <input
+                type="number"
+                id="age"
+                name="age"
+                min="18"
+                max="65"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>เพศ *</label>
+              <div class="radio-group">
+                <div class="radio-item">
+                  <input
+                    type="radio"
+                    id="male"
+                    name="gender"
+                    value="ชาย"
+                    required
+                  />
+                  <label for="male">ชาย</label>
+                </div>
+                <div class="radio-item">
+                  <input
+                    type="radio"
+                    id="female"
+                    name="gender"
+                    value="หญิง"
+                    required
+                  />
+                  <label for="female">หญิง</label>
+                </div>
+                <div class="radio-item">
+                  <input
+                    type="radio"
+                    id="other"
+                    name="gender"
+                    value="อื่นๆ"
+                    required
+                  />
+                  <label for="other">อื่นๆ</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-column">
+            <div class="form-group">
+              <label for="education">ระดับการศึกษา *</label>
+              <select id="education" name="education" required>
+                <option value="">-- เลือกระดับการศึกษา --</option>
+                <option value="มัธยมศึกษา">มัธยมศึกษา</option>
+                <option value="ปวช./ปวส.">ปวช./ปวส.</option>
+                <option value="ปริญญาตรี">ปริญญาตรี</option>
+                <option value="ปริญญาโท">ปริญญาโท</option>
+                <option value="ปริญญาเอก">ปริญญาเอก</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="occupation">อาชีพ *</label>
+              <input type="text" id="occupation" name="occupation" required />
+            </div>
+
+            <div class="form-group">
+              <label for="province">จังหวัดที่อยู่ *</label>
+              <input type="text" id="province" name="province" required />
+            </div>
+
+            <div class="form-group">
+              <label>ประสบการณ์งานอาสา *</label>
+              <div class="radio-group">
+                <div class="radio-item">
+                  <input
+                    type="radio"
+                    id="exp_none"
+                    name="experience"
+                    value="ไม่มีประสบการณ์"
+                    required
+                  />
+                  <label for="exp_none">ไม่มีประสบการณ์</label>
+                </div>
+                <div class="radio-item">
+                  <input
+                    type="radio"
+                    id="exp_some"
+                    name="experience"
+                    value="มีประสบการณ์บ้าง"
+                    required
+                  />
+                  <label for="exp_some">มีประสบการณ์บ้าง</label>
+                </div>
+                <div class="radio-item">
+                  <input
+                    type="radio"
+                    id="exp_much"
+                    name="experience"
+                    value="มีประสบการณ์มาก"
+                    required
+                  />
+                  <label for="exp_much">มีประสบการณ์มาก</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="motivation">เหตุผลที่ต้องการเข้าร่วม</label>
+              <textarea
+                id="motivation"
+                name="motivation"
+                rows="4"
+                placeholder="แบ่งปันเหตุผลที่ต้องการเป็นอาสาสมัครคุ้มครองสัตว์ป่า..."
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="checkbox-group">
+            <input type="checkbox" id="terms" name="terms" required />
+            <label for="terms"
+              >ยอมรับเงื่อนไขและข้อตกลงการเป็นอาสาสมัคร *</label
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="checkbox-group">
+            <input type="checkbox" id="newsletter" name="newsletter" />
+            <label for="newsletter"
+              >ต้องการรับข่าวสารและกิจกรรมต่างๆ ทางอีเมล</label
+            >
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">ส่งใบสมัคร</button>
+      </form>
+
+      <div id="resultSection" class="result-section">
+        <div class="success-message">
+          <h3>ลงทะเบียนสำเร็จ!</h3>
+          <p>
+            ขอบคุณที่เข้าร่วมเป็นอาสาสมัครคุ้มครองสัตว์ป่าไทย
+            เราจะติดต่อกลับไปในเร็วๆ นี้
+          </p>
+        </div>
+        <h3 style="color: #ff6b6b; margin-bottom: 20px">
+          📋 สรุปข้อมูลการสมัคร
+        </h3>
+        <table class="result-table" id="resultTable">
+          <thead>
+            <tr>
+              <th>รายการ</th>
+              <th>ข้อมูล</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("volunteerForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Get form data
+          const formData = new FormData(this);
+          const data = {};
+
+          // Get regular form fields
+          for (let [key, value] of formData.entries()) {
+            if (key !== "projects") {
+              data[key] = value;
+            }
+          }
+
+          // Get selected projects
+          const selectedProjects = [];
+          const projectCheckboxes = document.querySelectorAll(
+            'input[name="projects"]:checked'
+          );
+          projectCheckboxes.forEach((checkbox) => {
+            const card = checkbox.closest(".project-card");
+            const projectName = card.querySelector("h3").textContent.trim();
+            selectedProjects.push(projectName);
+          });
+
+          // Create result table
+          const tbody = document.querySelector("#resultTable tbody");
+          tbody.innerHTML = "";
+
+          // Define field labels in Thai
+          const fieldLabels = {
+            fullName: "ชื่อ-นามสกุล",
+            email: "อีเมล",
+            phone: "เบอร์โทรศัพท์",
+            age: "อายุ",
+            gender: "เพศ",
+            education: "ระดับการศึกษา",
+            occupation: "อาชีพ",
+            province: "จังหวัดที่อยู่",
+            experience: "ประสบการณ์งานอาสา",
+            motivation: "เหตุผลที่ต้องการเข้าร่วม",
+            terms: "ยอมรับเงื่อนไข",
+            newsletter: "รับข่าวสาร",
+          };
+
+          // Add selected projects to table
+          if (selectedProjects.length > 0) {
+            const row = tbody.insertRow();
+            row.insertCell(0).textContent = "โครงการที่เลือก";
+            row.insertCell(1).textContent = selectedProjects.join(", ");
+          }
+
+          // Add other form data to table
+          Object.entries(data).forEach(([key, value]) => {
+            if (fieldLabels[key]) {
+              const row = tbody.insertRow();
+              row.insertCell(0).textContent = fieldLabels[key];
+
+              let displayValue = value;
+              if (key === "terms" || key === "newsletter") {
+                displayValue = value ? "ใช่" : "ไม่";
+              } else if (key === "motivation" && !value) {
+                displayValue = "-";
+              } else if (key === "age") {
+                displayValue = value + " ปี";
+              }
+
+              row.insertCell(1).textContent = displayValue;
+            }
+          });
+
+          // Show result section and scroll to it
+          document.getElementById("resultSection").style.display = "block";
+          document.getElementById("resultSection").scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+
+          // Reset form
+          this.reset();
+          projectCheckboxes.forEach((checkbox) => {
+            checkbox.checked = false;
+          });
+        });
+
+      // Add click effect for project cards
+      document.querySelectorAll(".project-card").forEach((card) => {
+        card.addEventListener("click", function (e) {
+          if (e.target.type !== "checkbox") {
+            const checkbox = this.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+          }
+        });
+      });
+
+      // Add animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe all project cards
+      document.querySelectorAll(".project-card").forEach((card) => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(30px)";
+        card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        observer.observe(card);
+      });
+    </script>
+  </body>
+</html>

@@ -4,20 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wildlife4Life</title>
-    <link rel="stylesheet" href="/styles/styles.css" />
+
     <link rel="stylesheet" href="/style/silder.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-chubby/css/uicons-solid-chubby.css"
-    />
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <link rel="stylesheet" href="/styles/flat.css" />
   </head>
   <body>
     <div w3-include-html="components/navbar.html"></div>
@@ -84,7 +74,12 @@
               <li>พบเพื่อนใหม่ที่มีเป้าหมายเดียวกันในการดูแลโลกใบนี้</li>
             </ul>
 
-            <button class="btn-book">สมัครเป็นอาสาฯ →</button>
+            <button
+              class="btn-book"
+              onclick="window.location.href='/volunteer.html'"
+            >
+              สมัครเป็นอาสาฯ →
+            </button>
           </div>
 
           <div class="adventure-image">
@@ -108,7 +103,12 @@
             เพื่อการอยู่ร่วมกับสัตว์ป่าอย่างเคารพ
             ทุกแรงอาสาและทุกยอดบริจาคถูกส่งต่อสู่โครงการฟื้นฟูป่าไทยอย่างโปร่งใส
           </p>
-          <button class="btn-cta">เข้าร่วมกิจกรรม 26 ธ.ค. →</button>
+          <button
+            class="btn-cta"
+            onclick="window.location.href='/volunteer.html'"
+          >
+            เข้าร่วมกิจกรรม 26 ธ.ค. →
+          </button>
           <p class="cta-note">
             ที่นั่งมีจำนวนจำกัด เพื่อความปลอดภัยของสัตว์ป่าและผู้เข้าร่วม •
             ผู้เข้าร่วมได้รับเกียรติบัตร
@@ -128,7 +128,11 @@
             <p>
               รายชื่อ ชื่อวิทยาศาสตร์ พื้นที่พบ มาตรการคุ้มครอง อัปเดตปี 2567
             </p>
-            <button class="btn-cta" style="margin-top: 20px">
+            <button
+              class="btn-cta"
+              style="margin-top: 20px"
+              onclick="window.location.href='/chat-bot-wl-info.html'"
+            >
               ดูรายชื่อทั้งหมด →
             </button>
           </div>
@@ -147,7 +151,11 @@
               ข้อมูลขนาดพื้นที่ กฎระเบียบการเข้าพื้นที่ จุดศึกษาธรรมชาติ
               เส้นทางที่แนะนำ
             </p>
-            <button class="btn-cta" style="margin-top: 20px">
+            <button
+              class="btn-cta"
+              style="margin-top: 20px"
+              onclick="window.open('https://www.google.com/maps/search/%E0%B8%AD%E0%B8%B8%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%99%E0%B9%81%E0%B8%AB%E0%B9%88%E0%B8%87%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4/@13.8325611,100.3301648,11.8z?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D')"
+            >
               เปิดแผนที่ →
             </button>
           </div>
