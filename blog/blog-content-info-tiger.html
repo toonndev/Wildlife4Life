@@ -3,360 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>เสือโคร่งและเหยื่อ - บล็อกสัตว์ป่าไทย</title>
+    <title>Wildlife4Life</title>
 
     <link rel="stylesheet" href="/styles/flat.css" />
     <link rel="stylesheet" href="/styles/styles.css" />
     <link rel="stylesheet" href="/styles/blog-info.css" />
     <link rel="stylesheet" href="/style/silder.css" />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        /* background: linear-gradient(135deg, #1a3d2e 0%, #0f1e1a 100%);*/
-        background: #000;
-        color: #e8f5e8;
-        line-height: 1.6;
-        overflow-x: hidden;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
-
-      header {
-        background: rgba(0, 0, 0, 0.9);
-        padding: 20px 0;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 1000;
-        backdrop-filter: blur(10px);
-      }
-
-      .hero {
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)),
-          url("https://images.unsplash.com/photo-1452001603782-7d4e7d931173?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-        background-size: cover;
-        background-attachment: fixed;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        position: relative;
-      }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.7);
-        opacity: 0.3;
-      }
-
-      .hero-content {
-        z-index: 1;
-        position: relative;
-      }
-
-      .hero h1 {
-        font-size: 4rem;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        background: linear-gradient(45deg, #ffffff, #ffffffe4);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      .hero p {
-        font-size: 1.5rem;
-        margin-bottom: 30px;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-      }
-
-      .stats {
-        display: flex;
-        justify-content: center;
-        gap: 50px;
-        margin: 40px 0;
-        flex-wrap: wrap;
-      }
-
-      .stat-item {
-        text-align: center;
-        background: rgba(76, 175, 80, 0.1);
-        padding: 20px;
-        border-radius: 15px;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(76, 175, 80, 0.3);
-        min-width: 150px;
-      }
-
-      .stat-number {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #4caf50;
-        display: block;
-      }
-
-      .stat-label {
-        font-size: 0.9rem;
-        color: #b8e6b8;
-        margin-top: 5px;
-      }
-
-      .main-content {
-        padding: 80px 0;
-      }
-
-      .section {
-        margin: 80px 0;
-        background: rgba(255, 255, 255, 0.05);
-        padding: 40px;
-        border-radius: 20px;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(76, 175, 80, 0.2);
-        position: relative;
-      }
-
-      .section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #4caf50, #81c784);
-        border-radius: 20px 20px 0 0;
-      }
-
-      .section h2 {
-        font-size: 2.5rem;
-        margin-bottom: 30px;
-        color: #4caf50;
-        text-align: center;
-      }
-
-      .section h3 {
-        font-size: 1.8rem;
-        margin: 30px 0 20px 0;
-        color: #81c784;
-      }
-
-      .section p {
-        margin-bottom: 20px;
-        text-align: justify;
-        font-size: 1.1rem;
-      }
-
-      .species-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        margin: 40px 0;
-      }
-
-      .species-card {
-        background: rgba(0, 0, 0, 0.3);
-        padding: 30px;
-        border-radius: 15px;
-        border: 1px solid rgba(76, 175, 80, 0.3);
-        transition: transform 0.3s, box-shadow 0.3s;
-      }
-
-      .species-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(76, 175, 80, 0.2);
-      }
-
-      .species-card h4 {
-        color: #4caf50;
-        font-size: 1.3rem;
-        margin-bottom: 15px;
-      }
-
-      .species-status {
-        display: inline-block;
-        padding: 5px 15px;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        margin: 10px 0;
-      }
-
-      .extinct {
-        background: rgba(244, 67, 54, 0.2);
-        color: #ffcdd2;
-        border: 1px solid #f44336;
-      }
-
-      .surviving {
-        background: rgba(76, 175, 80, 0.2);
-        color: #c8e6c9;
-        border: 1px solid #4caf50;
-      }
-
-      .critically-endangered {
-        background: rgba(255, 152, 0, 0.2);
-        color: #ffcc02;
-        border: 1px solid #ff9800;
-      }
-
-      .highlight-box {
-        background: linear-gradient(
-          135deg,
-          rgba(76, 175, 80, 0.1),
-          rgba(129, 199, 132, 0.1)
-        );
-        border-left: 4px solid #4caf50;
-        padding: 25px;
-        margin: 30px 0;
-        border-radius: 0 15px 15px 0;
-      }
-
-      .diet-info {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
-        margin: 40px 0;
-      }
-
-      .diet-card {
-        background: rgba(0, 0, 0, 0.2);
-        padding: 25px;
-        border-radius: 15px;
-        text-align: center;
-        border: 1px solid rgba(76, 175, 80, 0.3);
-      }
-
-      .diet-icon {
-        font-size: 3rem;
-        margin-bottom: 15px;
-        display: block;
-      }
-
-      .timeline {
-        position: relative;
-        margin: 50px 0;
-      }
-
-      .timeline::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: #4caf50;
-        transform: translateX(-50%);
-      }
-
-      .timeline-item {
-        display: flex;
-        align-items: center;
-        margin: 30px 0;
-        position: relative;
-      }
-
-      .timeline-item:nth-child(odd) {
-        flex-direction: row-reverse;
-      }
-
-      .timeline-content {
-        background: rgba(0, 0, 0, 0.3);
-        padding: 25px;
-        border-radius: 15px;
-        width: 45%;
-        border: 1px solid rgba(76, 175, 80, 0.3);
-      }
-
-      .timeline-date {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #4caf50;
-        color: #000;
-        padding: 10px 15px;
-        border-radius: 20px;
-        font-weight: bold;
-        font-size: 0.9rem;
-      }
-
-      @media (max-width: 768px) {
-        .hero h1 {
-          font-size: 2.5rem;
-        }
-
-        .hero p {
-          font-size: 1.2rem;
-        }
-
-        .stats {
-          gap: 20px;
-        }
-
-        .stat-item {
-          min-width: 120px;
-          padding: 15px;
-        }
-
-        .section {
-          padding: 25px;
-          margin: 40px 0;
-        }
-
-        .section h2 {
-          font-size: 2rem;
-        }
-
-        .timeline::before {
-          left: 20px;
-        }
-
-        .timeline-item {
-          flex-direction: column !important;
-          align-items: flex-start;
-          padding-left: 50px;
-        }
-
-        .timeline-content {
-          width: 100%;
-        }
-
-        .timeline-date {
-          left: 20px;
-          transform: none;
-        }
-      }
-
-      .scroll-indicator {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: rgba(76, 175, 80, 0.3);
-        z-index: 1001;
-      }
-
-      .scroll-progress {
-        height: 100%;
-        background: linear-gradient(90deg, #4caf50, #81c784);
-        width: 0%;
-        transition: width 0.3s;
-      }
-    </style>
+    <link rel="stylesheet" href="/styles/blog-tiger.css" />
   </head>
   <body>
     <div w3-include-html="/components/navbar.html"></div>
@@ -539,30 +192,32 @@
 
         <div class="diet-info">
           <div class="diet-card">
-            <span class="diet-icon">🦌</span>
+            <span class="diet-icon"><img src="/images/banteng.jpeg" /></span>
             <h4>วัวแดง</h4>
-            <p>อาหารหลักของเสือโคร่ง มีขนาดใหญ่และให้พลังงานสูง</p>
+            <p>อาหารหลักของเสือโคร่งมีขนาดใหญ่และให้พลังงานสูง</p>
           </div>
           <div class="diet-card">
-            <span class="diet-icon">🦌</span>
+            <span class="diet-icon"
+              ><img src="/images/deer-national.jpg"
+            /></span>
             <h4>กวางป่า</h4>
             <p>เหยื่อที่พบได้ทั่วไปในป่าไผ่และป่าเบญจพรรณ</p>
           </div>
           <div class="diet-card">
-            <span class="diet-icon">🦌</span>
+            <span class="diet-icon"><img src="/images/deer2.jpg" /></span>
             <h4>เก้ง</h4>
             <p>สัตว์กีบขนาดกลางที่อาศัยในพื้นที่ป่าทึบ</p>
           </div>
           <div class="diet-card">
-            <span class="diet-icon">🐃</span>
+            <span class="diet-icon"><img src="/images/bull2.jpg" /></span>
             <h4>กระทิง</h4>
             <p>เหยื่อขนาดใหญ่ที่ให้อาหารได้นานหลายวัน</p>
           </div>
-          <div class="diet-card">
+          <!-- <div class="diet-card">
             <span class="diet-icon">🐗</span>
             <h4>หมูป่า</h4>
             <p>สัตว์ที่มีพฤติกรรมเป็นฝูงและมีขนาดหลากหลาย</p>
-          </div>
+          </div> -->
         </div>
 
         <h3>พฤติกรรมการล่า</h3>
@@ -642,7 +297,7 @@
 
         <div class="species-grid">
           <div class="species-card">
-            <h4>🎯 ความแม่นยำในการล่า</h4>
+            <h4>ความแม่นยำในการล่า</h4>
             <p>
               จากการศึกษาของ Schaller พบว่าจากการล่า 12 ครั้ง
               เสือโคร่งประสบผลสำเร็จเพียง 1 ครั้งเท่านั้น
@@ -650,7 +305,7 @@
           </div>
 
           <div class="species-card">
-            <h4>⏰ รอบการล่า</h4>
+            <h4>รอบการล่า</h4>
             <p>
               เสือโคร่งเพศเมียที่ไม่มีลูกจะออกล่าเหยื่อทุก 8-8.5 วัน
               ที่อุทยานแห่งชาติจิตวัน ประเทศอินเดีย
@@ -658,7 +313,7 @@
           </div>
 
           <div class="species-card">
-            <h4>👨‍👩‍👧‍👦 การเลี้ยงดูลูก</h4>
+            <h4>การเลี้ยงดูลูก</h4>
             <p>
               ลูกเสือโคร่งจะอาศัยอยู่กับแม่ไปจนกระทั่งอายุ 18-24 เดือน
               จึงเริ่มแยกออกจากแม่
@@ -666,7 +321,7 @@
           </div>
 
           <div class="species-card">
-            <h4>🌍 การกระจายพันธุ์</h4>
+            <h4>การกระจายพันธุ์</h4>
             <p>
               ในอดีตเสือโคร่งมีการกระจายพันธุ์อย่างกว้างขวางตั้งแต่ไซบีเรีย
               เอเชียตะวันตก ไปจนถึงบาหลี
@@ -674,7 +329,7 @@
           </div>
 
           <div class="species-card">
-            <h4>📊 อัตราการรอดชีวิต</h4>
+            <h4>อัตราการรอดชีวิต</h4>
             <p>
               ในธรรมชาติลูกเสือโคร่งจะมีโอกาสรอดชีวิตจนโตเต็มวัยประมาณ 50-70
               เปอร์เซนต์
@@ -682,7 +337,7 @@
           </div>
 
           <div class="species-card">
-            <h4>🤝 ความร่วมมือ</h4>
+            <h4>ความร่วมมือ</h4>
             <p>
               การร่วมมือในการล่าจะไม่ปรากฏเด่นชัด
               น่าจะเป็นเสือที่มีความสัมพันธ์ในครอบครัว
@@ -698,18 +353,18 @@
           <h3>ปัจจัยคุกคาม</h3>
           <ul style="list-style: none; padding: 0">
             <li>
-              🎯 <strong>การล่าเหยื่อของเสือโคร่ง</strong> -
+              <strong>1. การล่าเหยื่อของเสือโคร่ง</strong> -
               ลดจำนวนอาหารที่มีอยู่
             </li>
             <li>
-              🏭 <strong>การทำลายถิ่นที่อยู่อาศัย</strong> - ลดพื้นที่อาณาเขต
+              <strong>2. การทำลายถิ่นที่อยู่อาศัย</strong> - ลดพื้นที่อาณาเขต
             </li>
             <li>
-              👥 <strong>การขยายตัวของชุมชน</strong> -
+              <strong>3. การขยายตัวของชุมชน</strong> -
               เพิ่มความขัดแย้งระหว่างมนุษย์และสัตว์ป่า
             </li>
             <li>
-              🌡️ <strong>การเปลี่ยนแปลงสภาพภูมิอากาศ</strong> -
+              <strong>4. การเปลี่ยนแปลงสภาพภูมิอากาศ</strong> -
               ส่งผลต่อระบบนิเวศ
             </li>
           </ul>
@@ -724,23 +379,19 @@
         <div class="highlight-box">
           <h3>แนวทางการอนุรักษ์</h3>
           <p>
-            🌿
-            <strong>การปกป้องแบบองค์รวม:</strong>
+            <strong> 1. การปกป้องแบบองค์รวม:</strong>
             ต้องปกป้องทั้งเสือโคร่งและสัตว์ที่เป็นเหยื่อไปพร้อมกัน
           </p>
           <p>
-            📈
-            <strong>การเพิ่มประชากรเหยื่อ:</strong>
+            <strong> 2. การเพิ่มประชากรเหยื่อ:</strong>
             หากต้องการเพิ่มประชากรเสือโคร่งก็ต้องเพิ่มประชากรสัตว์กีบด้วย
           </p>
           <p>
-            🔍
-            <strong>การติดตามและวิจัย:</strong>
+            <strong> 3. การติดตามและวิจัย:</strong>
             ใช้เทคโนโลยีที่ทันสมัยในการศึกษาและติดตามประชากร
           </p>
           <p>
-            🤝
-            <strong>การมีส่วนร่วมของชุมชน:</strong>
+            <strong> 4. การมีส่วนร่วมของชุมชน:</strong>
             สร้างความเข้าใจและความร่วมมือจากชุมชนท้องถิ่น
           </p>
         </div>

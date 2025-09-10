@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Wildlife4Life – Products</title>
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <link rel="stylesheet" href="/styles/flat.css" />
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      :root {
+        --bg-900: #0b1116;
+        --bg-800: #0f1720;
+        --bg-700: #121a24;
+        --line-600: #1f2a36;
+        --text-100: #e5edf5;
+        --text-300: #b7c4d2;
+        --text-400: #9fb0c1;
+        --brand: #00b37a;
+        --brand-600: #089268;
+        --cta: #f59e0b;
+        --cta-600: #d97706;
+        --danger: #ef4444;
+        --radius-xl: 18px;
+        --radius-lg: 14px;
+        --radius-md: 10px;
+        --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.45);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Kanit", system-ui, -apple-system, "Segoe UI", Roboto,
+          Arial, sans-serif;
+        background: linear-gradient(180deg, #0a0f14 0%, var(--bg-900) 60%);
+        color: var(--text-100);
+        min-height: 100vh;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      /* Header (mini) */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(11, 17, 22, 0.8);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--line-600);
+      }
+      .nav .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 24px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+      }
+      .brand .paw {
+        color: #fff;
+      }
+      .brand span .hl {
+        color: var(--brand);
+      }
+      .nav a {
+        color: var(--text-300);
+      }
+      .nav a:hover {
+        color: #fff;
+      }
+
+      /* Flash sale */
+      .flash {
+        margin: 24px auto 8px;
+        padding: 18px;
+        background: linear-gradient(
+          180deg,
+          rgba(245, 158, 11, 0.12),
+          rgba(245, 158, 11, 0.05)
+        );
+        border: 1px solid rgba(245, 158, 11, 0.35);
+        border-radius: var(--radius-xl);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .flash-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .badge {
+        background: linear-gradient(135deg, var(--cta), var(--cta-600));
+        color: #0b1116;
+        font-weight: 900;
+        padding: 8px 12px;
+        border-radius: 10px;
+        box-shadow: 0 12px 24px rgba(245, 158, 11, 0.25);
+      }
+      .flash h3 {
+        font-size: 20px;
+      }
+      .timer {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 800;
+        background: #0c141b;
+        border: 1px solid var(--line-600);
+        padding: 8px 12px;
+        border-radius: 12px;
+      }
+      .timer .box {
+        min-width: 42px;
+        text-align: center;
+        background: #0f1720;
+        border: 1px solid var(--line-600);
+        padding: 6px 8px;
+        border-radius: 10px;
+        font-feature-settings: "tnum";
+        font-variant-numeric: tabular-nums;
+      }
+      .timer small {
+        color: var(--text-400);
+        font-weight: 500;
+      }
+
+      /* Grid */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .col-8 {
+        grid-column: span 8;
+      }
+      .col-4 {
+        grid-column: span 4;
+      }
+      @media (max-width: 1024px) {
+        .col-8 {
+          grid-column: span 12;
+        }
+        .col-4 {
+          grid-column: span 12;
+        }
+      }
+
+      /* Product cards */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      @media (max-width: 1024px) {
+        .cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 640px) {
+        .cards {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: linear-gradient(180deg, var(--bg-800), #0c141b);
+        border: 1px solid var(--line-600);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow-xl);
+        display: flex;
+        flex-direction: column;
+      }
+      .thumb {
+        position: relative;
+        aspect-ratio: 16/10;
+        overflow: hidden;
+      }
+      .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transform: scale(1.02);
+        transition: transform 0.4s ease;
+        filter: contrast(1.03) saturate(1.05);
+      }
+      .card:hover .thumb img {
+        transform: scale(1.06);
+      }
+      .body {
+        padding: 14px 14px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .title {
+        font-weight: 800;
+        font-size: 18px;
+      }
+      .desc {
+        color: var(--text-300);
+        font-size: 14px;
+        min-height: 42px;
+      }
+      .price {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .price .now {
+        color: #fff;
+        font-weight: 900;
+        font-size: 18px;
+      }
+      .price .old {
+        color: var(--text-400);
+        text-decoration: line-through;
+        font-size: 14px;
+      }
+      .meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--text-300);
+        font-size: 13px;
+      }
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .btn {
+        border: 0;
+        padding: 10px 12px;
+        border-radius: 12px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .btn-cta {
+        background: linear-gradient(135deg, var(--cta), var(--cta-600));
+        color: #0a0f14;
+      }
+      .btn-cta:hover {
+        filter: brightness(1.05);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: #fff;
+        border: 1px solid var(--line-600);
+      }
+      .stock {
+        color: var(--brand);
+        font-weight: 700;
+      }
+
+      /* Cart table */
+      .panel {
+        background: linear-gradient(180deg, var(--bg-800), #0c141b);
+        border: 1px solid var(--line-600);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .panel h3 {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line-600);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      thead th {
+        background: #0c141b;
+        color: var(--text-300);
+        text-align: left;
+        font-weight: 700;
+        padding: 12px;
+        border-bottom: 1px solid var(--line-600);
+      }
+      tbody td {
+        padding: 12px;
+        border-bottom: 1px solid var(--line-600);
+        vertical-align: middle;
+      }
+      .td-product {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .td-product img {
+        width: 56px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid var(--line-600);
+      }
+      .qty {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--line-600);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .qty button {
+        background: #0f1720;
+        color: #fff;
+        border: 0;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+      }
+      .qty input {
+        width: 48px;
+        height: 32px;
+        background: #0c141b;
+        color: #fff;
+        border: 0;
+        text-align: center;
+        font-weight: 700;
+      }
+      .td-actions button {
+        background: transparent;
+        color: #fff;
+        border: 1px solid var(--line-600);
+        padding: 6px 10px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .td-actions button:hover {
+        border-color: #fff;
+      }
+      .panel-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 16px;
+      }
+      .total {
+        font-size: 18px;
+        font-weight: 900;
+      }
+      .muted {
+        color: var(--text-300);
+      }
+
+      .btn-danger {
+        background: linear-gradient(135deg, #f87171, #ef4444);
+        color: #0b1116;
+        border: 0;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-weight: 900;
+        cursor: pointer;
+      }
+      .btn-danger:hover {
+        filter: brightness(1.05);
+      }
+      .btn-checkout {
+        background: linear-gradient(135deg, var(--brand), var(--brand-600));
+        color: #0b1116;
+        border: 0;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-weight: 900;
+        cursor: pointer;
+      }
+      .btn-checkout:hover {
+        filter: brightness(1.05);
+      }
+
+      /* Toast */
+      .toast {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 80;
+        display: none;
+        background: #0f1720;
+        border: 1px solid var(--line-600);
+        padding: 12px 14px;
+        border-radius: 12px;
+        box-shadow: var(--shadow-xl);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="margin: calc(10vh)"
+      w3-include-html="components/navbar.html"
+    ></div>
+    <main class="container">
+      <!-- FLASH SALE -->
+      <section class="flash" aria-live="polite">
+        <div class="flash-left">
+          <span class="badge"><i class="fa-solid fa-bolt"></i> Flash Sale</span>
+          <h3>ดีลพิเศษสำหรับวันนี้เท่านั้น</h3>
+        </div>
+        <div class="timer" id="timer">
+          <div class="box"><span id="d">00</span><br /><small>วัน</small></div>
+          <div>:</div>
+          <div class="box">
+            <span id="h">00</span><br /><small>ชั่วโมง</small>
+          </div>
+          <div>:</div>
+          <div class="box"><span id="m">00</span><br /><small>นาที</small></div>
+          <div>:</div>
+          <div class="box">
+            <span id="s">00</span><br /><small>วินาที</small>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid">
+        <!-- PRODUCTS -->
+        <section class="col-8">
+          <div class="cards" id="productGrid">
+            <!-- Cards will be injected here -->
+          </div>
+        </section>
+
+        <!-- CART -->
+        <aside class="col-4">
+          <div class="panel">
+            <h3 style="display: flex; align-items: center; gap: 8px">
+              <i class="fa-solid fa-cart-shopping"></i> ตะกร้าสินค้า
+            </h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width: 45%">สินค้า</th>
+                    <th style="width: 15%">ราคา</th>
+                    <th style="width: 20%">จำนวน</th>
+                    <th style="width: 15%">รวม</th>
+                    <th style="width: 5%"></th>
+                  </tr>
+                </thead>
+                <tbody id="cartBody">
+                  <tr>
+                    <td
+                      colspan="5"
+                      class="muted"
+                      style="text-align: center; padding: 20px"
+                    >
+                      ยังไม่มีสินค้าในตะกร้า
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="panel-footer">
+              <div>
+                <div class="total">
+                  ยอดรวม: <span id="grandTotal">฿0.00</span>
+                </div>
+                <div class="muted" style="font-size: 12px">
+                  *ราคาแสดงเป็น THB รวมภาษีแล้ว (หากมี)
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px">
+                <button class="btn-danger" id="clearCart">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+                <button class="btn-checkout" id="checkoutBtn">ชำระเงิน</button>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <div class="toast" id="toast">
+      <i class="fa-solid fa-circle-check" style="color: var(--brand)"></i>
+      <span id="toastMsg">เพิ่มลงตะกร้าแล้ว</span>
+    </div>
+    <div w3-include-html="components/footer.html"></div>
+    <script src="/javascript/volunteer.js"></script>
+    <script src="/javascript/script.js"></script>
+    <script src="/javascript/slider.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script>
+      w3.includeHTML();
+    </script>
+    <script>
+      // ===== Utilities =====
+      const fmt = new Intl.NumberFormat("th-TH", {
+        style: "currency",
+        currency: "THB",
+      });
+      const $ = (sel, root = document) => root.querySelector(sel);
+      const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+
+      // ===== Demo Products (6 items) =====
+      const PRODUCTS = [
+        {
+          id: "P01",
+          name: "กล้องส่องนก รุ่น Explorer",
+          price: 1890,
+          compareAt: 2290,
+          stock: 24,
+          img: "https://images.unsplash.com/photo-1543342386-1b82a5a0d54b?q=80&w=1200&auto=format&fit=crop",
+        },
+        {
+          id: "P02",
+          name: "ขวดน้ำรักษ์โลก 1 ลิตร",
+          price: 350,
+          compareAt: 450,
+          stock: 120,
+          img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200&auto=format&fit=crop",
+        },
+        {
+          id: "P03",
+          name: "ไฟฉายคาดหัว Trail Pro",
+          price: 690,
+          compareAt: 790,
+          stock: 48,
+          img: "https://images.unsplash.com/photo-1514477917009-389c76a86b68?q=80&w=1200&auto=format&fit=crop",
+        },
+        {
+          id: "P04",
+          name: "มีดพกเอนกประสงค์",
+          price: 560,
+          compareAt: 650,
+          stock: 75,
+          img: "https://images.unsplash.com/photo-1518544801976-3e179d8fd680?q=80&w=1200&auto=format&fit=crop",
+        },
+        {
+          id: "P05",
+          name: "สมุดภาคสนามกันน้ำ",
+          price: 220,
+          compareAt: 260,
+          stock: 200,
+          img: "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?q=80&w=1200&auto=format&fit=crop",
+        },
+        {
+          id: "P06",
+          name: "กระเป๋าเป้แคมป์ 35L",
+          price: 1490,
+          compareAt: 1890,
+          stock: 31,
+          img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop",
+        },
+      ];
+
+      // ===== Render Product Cards =====
+      function renderProducts() {
+        const grid = $("#productGrid");
+        grid.innerHTML = PRODUCTS.map(
+          (p) => `
+        <article class="card" data-id="${p.id}">
+          <div class="thumb">
+            <img src="${p.img}" alt="${p.name}">
+          </div>
+          <div class="body">
+            <div class="title">${p.name}</div>
+            <div class="desc">อุปกรณ์ออกภาคสนามคุณภาพดี เหมาะกับนักสำรวจและอาสาสมัครอนุรักษ์</div>
+            <div class="price">
+              <span class="now">${fmt.format(p.price)}</span>
+              <span class="old">${fmt.format(p.compareAt)}</span>
+            </div>
+            <div class="meta">
+              <span class="stock"><i class="fa-solid fa-check"></i> มีสินค้า</span>
+              <span class="muted">คงเหลือ ${p.stock}</span>
+            </div>
+            <div class="actions">
+              <button class="btn btn-cta add-btn"><i class="fa-solid fa-cart-plus"></i> ใส่ตะกร้า</button>
+              <button class="btn btn-ghost" onclick="viewDetail('${
+                p.id
+              }')"><i class="fa-regular fa-eye"></i></button>
+            </div>
+          </div>
+        </article>
+      `
+        ).join("");
+        // attach events
+        $$(".add-btn", grid).forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            const id = e.currentTarget.closest(".card").dataset.id;
+            addToCart(id, 1);
+          });
+        });
+      }
+
+      function viewDetail(id) {
+        const p = PRODUCTS.find((x) => x.id === id);
+        alert(
+          `${p.name}\nราคา: ${fmt.format(
+            p.price
+          )}\n\n(ตัวอย่าง modal/หน้า detail)`
+        );
+      }
+
+      // ===== Cart State =====
+      const CART_KEY = "wl_cart_v1";
+      const cart = loadCart();
+
+      function loadCart() {
+        try {
+          return JSON.parse(localStorage.getItem(CART_KEY)) || {};
+        } catch {
+          return {};
+        }
+      }
+      function saveCart() {
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      }
+
+      function addToCart(id, qty = 1) {
+        cart[id] = (cart[id] || 0) + qty;
+        saveCart();
+        renderCart();
+        toast("เพิ่มลงตะกร้าแล้ว");
+      }
+      function removeItem(id) {
+        delete cart[id];
+        saveCart();
+        renderCart();
+      }
+      function setQty(id, qty) {
+        if (qty <= 0) {
+          removeItem(id);
+          return;
+        }
+        cart[id] = qty;
+        saveCart();
+        renderCart();
+      }
+      function clearCart() {
+        for (const k in cart) delete cart[k];
+        saveCart();
+        renderCart();
+      }
+
+      // ===== Render Cart Table =====
+      function renderCart() {
+        const body = $("#cartBody");
+        const entries = Object.entries(cart);
+        if (entries.length === 0) {
+          body.innerHTML = `<tr><td colspan="5" class="muted" style="text-align:center;padding:20px">ยังไม่มีสินค้าในตะกร้า</td></tr>`;
+          $("#grandTotal").textContent = fmt.format(0);
+          return;
+        }
+        let total = 0;
+        body.innerHTML = entries
+          .map(([id, qty]) => {
+            const p = PRODUCTS.find((x) => x.id === id);
+            const sub = p.price * qty;
+            total += sub;
+            return `
+          <tr data-id="${id}">
+            <td class="td-product"><img src="${p.img}" alt="${p.name}"><div>${
+              p.name
+            }</div></td>
+            <td>${fmt.format(p.price)}</td>
+            <td>
+              <div class="qty">
+                <button class="dec">-</button>
+                <input type="number" min="1" value="${qty}">
+                <button class="inc">+</button>
+              </div>
+            </td>
+            <td>${fmt.format(sub)}</td>
+            <td class="td-actions"><button class="rmv"><i class="fa-solid fa-xmark"></i></button></td>
+          </tr>
+        `;
+          })
+          .join("");
+        $("#grandTotal").textContent = fmt.format(total);
+
+        // bind qty controls
+        $$("#cartBody tr").forEach((row) => {
+          const id = row.dataset.id;
+          row
+            .querySelector(".dec")
+            .addEventListener("click", () => setQty(id, (cart[id] || 1) - 1));
+          row
+            .querySelector(".inc")
+            .addEventListener("click", () => setQty(id, (cart[id] || 0) + 1));
+          row
+            .querySelector("input")
+            .addEventListener("change", (e) =>
+              setQty(id, parseInt(e.target.value || 1))
+            );
+          row
+            .querySelector(".rmv")
+            .addEventListener("click", () => removeItem(id));
+        });
+      }
+
+      $("#clearCart").addEventListener("click", clearCart);
+      $("#checkoutBtn").addEventListener("click", () => {
+        const entries = Object.entries(cart);
+        if (entries.length === 0) {
+          toast("ตะกร้าของคุณว่างเปล่า");
+          return;
+        }
+        alert(
+          "ดำเนินการชำระเงิน (ตัวอย่าง) – รวมทั้งสิ้น: " +
+            $("#grandTotal").textContent
+        );
+      });
+
+      // ===== Toast =====
+      const toastEl = $("#toast"),
+        toastMsg = $("#toastMsg");
+      let toastTimer;
+      function toast(msg) {
+        toastMsg.textContent = msg;
+        toastEl.style.display = "block";
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => (toastEl.style.display = "none"), 1600);
+      }
+
+      // ===== Countdown (Flash Sale) =====
+      // ตั้งเวลาเป้าหมาย (ตัวอย่าง: อีก 2 ชั่วโมงนับจากตอนนี้)
+      const target = new Date(Date.now() + 2 * 60 * 60 * 1000);
+      function tick() {
+        const now = new Date();
+        let ms = target - now;
+        if (ms < 0) ms = 0;
+        const d = Math.floor(ms / 86400000);
+        ms %= 86400000;
+        const h = Math.floor(ms / 3600000);
+        ms %= 3600000;
+        const m = Math.floor(ms / 60000);
+        ms %= 60000;
+        const s = Math.floor(ms / 1000);
+        $("#d").textContent = String(d).padStart(2, "0");
+        $("#h").textContent = String(h).padStart(2, "0");
+        $("#m").textContent = String(m).padStart(2, "0");
+        $("#s").textContent = String(s).padStart(2, "0");
+
+        if (d + h + m + s === 0) {
+          $(".flash h3").textContent = "รอบถัดไปจะเริ่มเร็ว ๆ นี้";
+        }
+      }
+      setInterval(tick, 1000);
+      tick();
+
+      // Init
+      renderProducts();
+      renderCart();
+    </script>
+  </body>
+</html>

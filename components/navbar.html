@@ -1,39 +1,206 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-      <div class="container">
-        <div class="nav-brand">
-          <!-- <img src="images/deer-logo.png" alt="Deer" class="logo-icon" /> -->
-          <i class="fa-solid fa-paw" style="color: white"></i>
-          <span class="logo-text"
-            >Wildlife<span class="highlight">4Life</span></span
-          >
-        </div>
-        <ul class="nav-menu">
-          <li><a href="/index.html">Home</a></li>
-          <li><a href="/about-us.html">About Us</a></li>
-          <li><a href="#tours">Tours & Packages</a></li>
-          <li><a href="/blog/blogInfo.html">Blog</a></li>
-          <li><a href="/contact.html">Contact Us</a></li>
-          <li><a href="/chat-bot-wl-info.html">Chat</a></li>
-        </ul>
-        <div class="nav-actions">
-          <button class="search-btn">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-          <button class="nav-toggle">☰</button>
-        </div>
+<!-- Fonts & Icons -->
+<link rel="stylesheet" href="/styles/styles.css" />
+<link rel="stylesheet" href="/styles/flat.css" />
+
+<style>
+  :root {
+    --nav-bg: #0b1116;
+    --nav-line: #1f2a36;
+    --text: #e5edf5;
+    --muted: #b7c4d2;
+    --brand: #00b37a;
+    --cta: #f59e0b;
+    --cta-600: #d97706;
+  }
+
+  .search-btn,
+  .nav-toggle {
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .nav-toggle {
+    display: none;
+  }
+
+  /* login button */
+  .btn-login {
+    background: linear-gradient(135deg, var(--cta), var(--cta-600));
+    color: #0a0f14;
+    border: 0;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .btn-login:hover {
+    filter: brightness(1.05);
+  }
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--nav-line);
+    color: var(--text);
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  /* user dropdown (เมื่อ login แล้ว) */
+  .user {
+    position: relative;
+    display: none; /* default hidden; JS จะ toggle */
+  }
+  .user-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid var(--nav-line);
+    color: var(--text);
+    padding: 6px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .user-menu {
+    position: absolute;
+    right: 0;
+    top: 42px;
+    min-width: 180px;
+    background: #0f1720;
+    border: 1px solid var(--nav-line);
+    border-radius: 12px;
+    padding: 6px;
+    display: none;
+  }
+  .user-menu a,
+  .user-menu button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 12px;
+    color: var(--muted);
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  .user-menu a:hover,
+  .user-menu button:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+  }
+
+  /* Mobile */
+  @media (max-width: 920px) {
+    .nav-menu {
+      position: fixed;
+      inset: auto 0 0 0;
+      top: 60px;
+      background: #0b1116;
+      border-top: 1px solid var(--nav-line);
+      display: none;
+      flex-direction: column;
+      padding: 14px 16px;
+      gap: 12px;
+    }
+    .nav-toggle {
+      display: inline-block;
+    }
+  }
+</style>
+
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-brand">
+      <i class="fa-solid fa-paw" style="color: white"></i>
+      <span class="logo-text"
+        >Wildlife<span class="highlight">4Life</span></span
+      >
+    </div>
+
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/about-us.html">About Us</a></li>
+      <li><a href="/product.html">Product</a></li>
+      <li><a href="/blog/blogInfo.html">Blog</a></li>
+      <li><a href="/contact.html">Contact Us</a></li>
+      <li><a href="/chat-bot-wl-info.html">Chat</a></li>
+      <!-- duplicate login link for mobile list (จะถูกซ่อนไว้เมื่อ login) -->
+      <li id="mLoginItem" style="display: none">
+        <a href="/components/login.html">เข้าสู่ระบบ</a>
+      </li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="search-btn" aria-label="Search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+
+      <!-- ปุ่มสมัคร/เข้าสู่ระบบ (desktop) -->
+      <div id="authBtns">
+        <a href="/components/login.html" class="btn-login">เข้าสู่ระบบ</a>
+        <!-- ถ้าต้องการ Signup: <a href="/auth/register.html" class="btn-ghost">สมัครสมาชิก</a> -->
       </div>
-    </nav>
-    <script src="/javascript/script.js"></script>
-    <script src="/javascript/slider.js"></script>
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-  </body>
-</html>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        ☰
+      </button>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile toggle
+  const navToggle = document.getElementById("navToggle");
+  const navMenu = document.getElementById("navMenu");
+  navToggle?.addEventListener("click", () => {
+    const shown = getComputedStyle(navMenu).display !== "none";
+    navMenu.style.display = shown ? "none" : "flex";
+  });
+
+  // ==== Auth UI (demo) ====
+  // สมมติเมื่อ login แล้วจะมี localStorage: wl_auth_user = JSON.stringify({name:"Chakrit"})
+  const authBtns = document.getElementById("authBtns");
+  const userBox = document.getElementById("userBox");
+  const mLoginItem = document.getElementById("mLoginItem");
+  const userBtn = document.getElementById("userBtn");
+  const userMenu = document.getElementById("userMenu");
+  const userName = document.getElementById("userName");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  function renderAuth() {
+    const raw = localStorage.getItem("wl_auth_user");
+    const user = raw ? JSON.parse(raw) : null;
+
+    if (user) {
+      authBtns.style.display = "none";
+      userBox.style.display = "block";
+      mLoginItem.style.display = "none";
+      userName.textContent = user.name || "ผู้ใช้";
+    } else {
+      authBtns.style.display = "block";
+      userBox.style.display = "none";
+      mLoginItem.style.display = "list-item";
+    }
+  }
+  renderAuth();
+
+  // dropdown
+  userBtn?.addEventListener("click", () => {
+    const opened = getComputedStyle(userMenu).display !== "none";
+    userMenu.style.display = opened ? "none" : "block";
+  });
+  document.addEventListener("click", (e) => {
+    if (!userBox.contains(e.target)) userMenu.style.display = "none";
+  });
+
+  // logout
+  logoutBtn?.addEventListener("click", () => {
+    localStorage.removeItem("wl_auth_user");
+    renderAuth();
+  });
+</script>
