@@ -3,9 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Wildlife4Life – Products</title>
-    <link rel="stylesheet" href="/styles/styles.css" />
-    <link rel="stylesheet" href="/styles/flat.css" />
+    <title>Wildlife4Life</title>
+
     <!-- Icons -->
     <link
       rel="stylesheet"
@@ -16,6 +15,7 @@
 
     <style>
       :root {
+        --nav-h: 72px; /* ปรับตามความสูงจริงของ navbar */
         --bg-900: #0b1116;
         --bg-800: #0f1720;
         --bg-700: #121a24;
@@ -90,6 +90,9 @@
         color: #fff;
       }
 
+      main.container {
+        margin-top: var(--nav-h);
+      }
       /* Flash sale */
       .flash {
         margin: 24px auto 8px;
@@ -408,12 +411,11 @@
         box-shadow: var(--shadow-xl);
       }
     </style>
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <link rel="stylesheet" href="/styles/flat.css" />
   </head>
   <body>
-    <div
-      style="margin: calc(10vh)"
-      w3-include-html="components/navbar.html"
-    ></div>
+    <div w3-include-html="components/navbar.html"></div>
     <main class="container">
       <!-- FLASH SALE -->
       <section class="flash" aria-live="polite">
@@ -519,52 +521,58 @@
       // ===== Demo Products (6 items) =====
       const PRODUCTS = [
         {
-          id: "P01",
-          name: "กล้องส่องนก รุ่น Explorer",
+          id: "WL4L001",
+          name: "กระเป๋าผ้าลาย Wildlife4Life",
           price: 1890,
           compareAt: 2290,
           stock: 24,
-          img: "https://images.unsplash.com/photo-1543342386-1b82a5a0d54b?q=80&w=1200&auto=format&fit=crop",
+          img: "/images/product/BAG.png",
+          desc: "กระเป๋าผ้าดีไซน์รักษ์โลก ใช้งานได้ทุกโอกาส",
         },
         {
-          id: "P02",
-          name: "ขวดน้ำรักษ์โลก 1 ลิตร",
+          id: "WL4L002",
+          name: "ขวดน้ำWildlife4Life รักษ์โลก",
           price: 350,
           compareAt: 450,
           stock: 120,
-          img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200&auto=format&fit=crop",
+          img: "/images/product/TUMBLER.png",
+          desc: "ขวดน้ำพกพา ใช้ซ้ำได้ ลดการใช้พลาสติก",
         },
         {
-          id: "P03",
-          name: "ไฟฉายคาดหัว Trail Pro",
+          id: "WL4L003",
+          name: "เสื้อยึด Wildlife4Life",
           price: 690,
           compareAt: 790,
           stock: 48,
-          img: "https://images.unsplash.com/photo-1514477917009-389c76a86b68?q=80&w=1200&auto=format&fit=crop",
+          img: "/images/product/SHIRT.png",
+          desc: "เสื้อยืดผ้านุ่ม สบาย ใส่ได้ทุกวัน",
         },
         {
-          id: "P04",
-          name: "มีดพกเอนกประสงค์",
-          price: 560,
-          compareAt: 650,
+          id: "WL4L004",
+          name: "กางเกงผ้าฝ้ายลาย Wildlife4Life",
+          price: 990,
+          compareAt: 1299,
           stock: 75,
-          img: "https://images.unsplash.com/photo-1518544801976-3e179d8fd680?q=80&w=1200&auto=format&fit=crop",
+          img: "/images/product/SWEATPANTS.png",
+          desc: "กางเกงผ้าฝ้ายใส่สบาย เหมาะกับการเดินทาง",
         },
         {
-          id: "P05",
-          name: "สมุดภาคสนามกันน้ำ",
-          price: 220,
-          compareAt: 260,
+          id: "WL4L005",
+          name: "หมวกเดินป่า Wildlife4Life",
+          price: 2220,
+          compareAt: 2960,
           stock: 200,
-          img: "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?q=80&w=1200&auto=format&fit=crop",
+          img: "/images/product/BUCKET.png",
+          desc: "หมวกเดินป่า กันแดด พร้อมลุยทุกกิจกรรม",
         },
         {
-          id: "P06",
-          name: "กระเป๋าเป้แคมป์ 35L",
+          id: "WL4L006",
+          name: "แก้ว Wildlife4Life อเนกประสงค์ ",
           price: 1490,
           compareAt: 1890,
           stock: 31,
-          img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop",
+          img: "/images/product/GLASS.png",
+          desc: "แก้วอเนกประสงค์ ใช้ง่าย เหมาะทั้งในและนอกบ้าน",
         },
       ];
 
@@ -579,7 +587,7 @@
           </div>
           <div class="body">
             <div class="title">${p.name}</div>
-            <div class="desc">อุปกรณ์ออกภาคสนามคุณภาพดี เหมาะกับนักสำรวจและอาสาสมัครอนุรักษ์</div>
+            <div class="desc">${p.desc}</div>
             <div class="price">
               <span class="now">${fmt.format(p.price)}</span>
               <span class="old">${fmt.format(p.compareAt)}</span>
